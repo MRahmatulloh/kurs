@@ -17,8 +17,8 @@ $this->title = ' ';
     <title>UZSCOOL</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
-    <link href="<?= Yii::getAlias('@web')?>/frontend/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?= Yii::getAlias('@web')?>/frontend/assets/dist/css/cover.css" rel="stylesheet">
+    <link href="<?= Yii::getAlias('@web')?>/front/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= Yii::getAlias('@web')?>/front/assets/dist/css/cover.css" rel="stylesheet">
 </head>
 <body class="d-block w-100 text-center text-white">
 
