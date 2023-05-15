@@ -26,7 +26,6 @@ use yii\bootstrap5\ActiveForm;
         'options' => ['placeholder' => 'Kursni tanlang ...'],
         'pluginOptions' => [
             'allowClear' => true,
-            'disabled' => $model->course_id ? true : false,
         ],
     ]); ?>
 
