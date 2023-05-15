@@ -25,12 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
 </style>
 <div class="book-index container">
 <div class="col-10 m-auto">
-    <!--    <p class="text-right">-->
-    <!--        --><?//= Html::a('Kitob qo\'shish', ['create'], ['class' => 'btn btn-success']) ?>
-    <!--    </p>-->
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
 
     <div class="container">
         <div class="row">
