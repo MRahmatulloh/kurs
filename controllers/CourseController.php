@@ -79,14 +79,17 @@ class CourseController extends Controller
         $moduleDataProvider = $searchModule->search($this->request->queryParams);
 
         $searchLesson = new LessonSearch();
-        $searchLesson->module_id = $id;
+        $searchLesson->module_id = $module_id;
         $lessonDataProvider = $searchLesson->search($this->request->queryParams);
+
+        $module_name = Module::findOne($module_id)->name ?? '';
 
         return $this->render('details', [
             'model' => $this->findModel($id),
             'moduleDataProvider' => $moduleDataProvider,
             'lessonDataProvider' => $lessonDataProvider,
             'searchModule' => $searchModule,
+            'module_name' => $module_name
         ]);
     }
 

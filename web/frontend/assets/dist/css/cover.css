@@ -1,0 +1,328 @@
+/*
+ * Globals
+ */
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+    color: #333;
+    text-shadow: none; /* Prevent inheritance from `body` */
+}
+
+
+/*
+ * Base structure
+ */
+
+body {
+    /*text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);*/
+    /*box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);*/
+    font-family: 'Calibri', sans-serif;
+    font-style: normal;
+    font-weight: 380;
+    font-size: 22px;
+    line-height: 27px;
+    /* identical to box height */
+    background-color: #011A11;
+    background-repeat: no-repeat;
+    overflow-x: clip;
+}
+
+/*
+ * Header
+ */
+
+.nav-masthead .nav-link {
+    padding: 3rem 0.5rem;
+    position: relative;
+    font-weight: 400;
+    color: rgba(255, 255, 255, .5);
+    background-color: transparent;
+    border-bottom: .25rem solid transparent;
+    transition: all 0.3s ease-in-out;
+    bottom: -0.2rem;
+
+    text-transform: uppercase;
+}
+
+.nav-masthead .nav-link:focus:after, .nav-masthead .nav-link:hover:after {
+    position: absolute;
+    width: 2.0rem;
+    height: 2.0rem;
+    content: '';
+    border-top: .25rem solid #03F291;
+    border-left: .25rem solid #03F291;
+    top: 88%;
+    left: 50%;
+    transform: rotate(45deg);
+    margin-left: -1.25rem;
+    background-color: #011A11;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+    border-bottom: .25rem solid transparent;
+    border-image: linear-gradient(to right, #011A11 0%, #03F291 35%, #03F291 40%, #011A11 100%) 1;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-masthead .nav-link + .nav-masthead .nav-link {
+    margin-left: 1rem;
+}
+
+.nav-masthead .active {
+    color: #fff !important;
+    border-bottom: .25rem solid transparent;
+    border-image: linear-gradient(to right, #011A11 0%, #03F291 35%, #03F291 40%, #011A11 100%) 1;
+    transition: all 0.3s ease-in-out;
+}
+
+header .active:after {
+    position: absolute;
+    width: 2.0rem;
+    height: 2.0rem;
+    content: '';
+    border-top: .25rem solid #03F291;
+    border-left: .25rem solid #03F291;
+    top: 88%;
+    left: 50%;
+    transform: rotate(45deg);
+    margin-left: -1.25rem;
+    background-color: #011A11;
+    transition: all 0.3s ease-in-out;
+}
+
+#navbarsExample05 {
+    box-sizing: border-box;
+    border-bottom: .125rem solid #012C1B;
+}
+
+.blur {
+    /*background-image: url("data:image/svg+xml,%3Csvg width='1106' height='1000' viewBox='0 0 1106 1000' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg filter='url(%23filter0_f_1_432)'%3E%3Cellipse cx='548' cy='455.5' rx='293' ry='279.5' fill='%2300331F'/%3E%3C/g%3E%3Cdefs%3E%3Cfilter id='filter0_f_1_432' x='-10' y='-89' width='1116' height='1089' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='132.5' result='effect1_foregroundBlur_1_432'/%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E%0A");*/
+    background: radial-gradient(#00331F, #011A11, #011A11) no-repeat no-repeat center;
+    background-size: cover;
+    position: absolute;
+    /*overflow: hidden;*/
+    z-index: -100;
+    border-radius: 50%;
+}
+
+.blur1 {
+    height: 55rem;
+    width: 55rem;
+    top: -15rem;
+    left: -15rem;
+}
+
+.blur2 {
+    height: 45rem;
+    width: 45rem;
+    top: -5rem;
+    left: -15rem;
+}
+
+.blur3 {
+    height: 45rem;
+    width: 45rem;
+    bottom: -30rem;
+    right: -20rem;
+}
+
+.blur4 {
+    height: 45rem;
+    width: 45rem;
+    bottom: -20rem;
+    right: -20rem;
+}
+
+.blur5 {
+    height: 45rem;
+    width: 45rem;
+    bottom: -5rem;
+    right: -15rem;
+}
+
+.blur6 {
+    height: 50rem;
+    width: 50rem;
+    top: 2rem;
+    left: -35rem;
+}
+
+.blur7 {
+    height: 45rem;
+    width: 45rem;
+    bottom: -15rem;
+    right: -35rem;
+}
+
+.blur8 {
+    height: 50rem;
+    width: 50rem;
+    top: 5%;
+    right: 20%;
+}
+
+.p4{
+    position: absolute;
+    top: 0;
+    left: -17.5rem;
+}
+.p4_1 p{
+font-size: 20px;
+}
+
+.title h1{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 42px;
+    font-weight: 500;
+    color: #FFFFFF;
+
+    text-transform: uppercase;
+}
+
+.title p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.trade{
+    font-size: 24px;
+    color: #03F291;
+    text-transform: uppercase;
+}
+
+.reg input{
+    height: 3.5rem;
+    border-radius: 1rem;
+    background-color: #BBBBBB;
+}
+
+.reg{
+    background-color: #FFFFFF;
+}
+
+.card .btn-success {
+    background-color:  #03F291;
+    border-color: #03F291;
+}
+
+.login-via {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+}
+
+.login-via span {
+    background:#FFFFFF;!important;
+    padding:0 10px;
+}
+
+.bg1{
+    background-color: #011A11;
+}
+.bg2{
+    background-color: #0D3511;
+}
+.bg3{
+    background-color: #1F4323;
+}
+.bg4{
+    background-color: #03F291;
+}
+.bg5{
+    background-color: #01130D;
+}
+.tc1{
+    color: #03F291;
+    font-size: 150px;
+}
+
+.tc{
+    color: #03F291;
+}
+
+.tc1{
+    color: #0D3511;
+}
+
+footer{
+    color: white;
+    background-color: #3D3E42;
+}
+
+footer a{
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover,
+footer a:focus{
+    color: #03F291;
+}
+
+.bg6{
+    color: white;
+    background-color: #3D3E42;
+}
+
+.bg7{
+    background-color: rgba(1, 19, 13, .3);
+}
+
+.bg8{
+    background-color: #999999;
+}
+
+.sidebar .nav-item:hover{
+    color: #03F291!important;
+    border-left: 5px solid #03F291!important;
+}
+.sidebar .nav-link:hover{
+    color: #03F291!important;
+}
+.sidebar .active .nav-link{
+    color: #03F291!important;
+}
+.sidebar .nav-item{
+    border-left: 5px solid transparent!important;
+}
+
+.sidebar .active{
+    color: #03F291!important;
+    border-left: 5px solid #03F291!important;
+}
+
+.kurs .nav-item{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    background-color: #999999!important;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+}

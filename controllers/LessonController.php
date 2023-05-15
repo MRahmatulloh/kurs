@@ -4,9 +4,11 @@ namespace app\controllers;
 
 use app\models\Lesson;
 use app\models\search\LessonSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * LessonController implements the CRUD actions for Lesson model.
@@ -76,6 +78,45 @@ class LessonController extends Controller
         }
 
         return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionCreateAjax()
+    {
+        $model = new Lesson();
+
+        if ($this->request->isAjax && $model->load($this->request->post())) {
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $model->uuid = format_uuidv4(random_bytes(16));
+
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if ($model->file){
+                $model->filename = $model->uuid . '.' . $model->file->extension;
+                $model->file->saveAs($model->getFilePath(), false);
+            }
+
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно сохранены'));
+            }else{
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Unable save data. {title}: {errors}', [
+                    'title' => $model->getTitle(),
+                    'errors' => json_encode($model->getErrors()),
+                ]));
+            }
+
+            return $this->redirect([
+                'course/details',
+                'id' => $model->module->course_id,
+                'module_id' => $model->module_id
+            ]);
+        }
+
+        return $this->renderAjax('create_ajax', [
             'model' => $model,
         ]);
     }

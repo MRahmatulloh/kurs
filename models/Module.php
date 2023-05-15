@@ -35,6 +35,14 @@ class Module extends \yii\db\ActiveRecord
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public static function getTitle()
+    {
+        return 'Modul';
+    }
+
+    /**
      * @inheritdoc
      */
     public function behaviors()

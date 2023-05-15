@@ -28,12 +28,22 @@ class Lesson extends \yii\db\ActiveRecord
 {
     use SelectListTrait;
 
+    public $file;
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'lessons';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getTitle()
+    {
+        return 'Dars';
     }
 
     /**
@@ -57,7 +67,9 @@ class Lesson extends \yii\db\ActiveRecord
             [['module_id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['uuid', 'name', 'filename'], 'string', 'max' => 255],
             [['module_id'], 'exist', 'skipOnError' => true, 'targetClass' => Module::class, 'targetAttribute' => ['module_id' => 'id']],
-        ];
+            [['file'], 'file', 'extensions' => 'mp4, 3gp, mov, avi', 'maxFiles' => 1, 'maxSize' => 150 * 1024 * 1024],
+            [['file'], 'required', 'on' => 'create'],
+            ];
     }
 
     /**
@@ -70,6 +82,7 @@ class Lesson extends \yii\db\ActiveRecord
             'uuid' => 'Uuid',
             'name' => 'Nomi',
             'filename' => 'Fayl',
+            'file' => 'Fayl',
             'description' => 'Izoh',
             'module_id' => 'Modul',
             'status' => 'Status',
@@ -98,5 +111,10 @@ class Lesson extends \yii\db\ActiveRecord
     public function getViews()
     {
         return $this->hasMany(View::class, ['lesson_id' => 'id']);
+    }
+
+    public function getFilePath()
+    {
+        return Yii::getAlias('@app') . '/files/lessons/' . $this->filename;
     }
 }

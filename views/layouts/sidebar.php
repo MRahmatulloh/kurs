@@ -35,9 +35,9 @@
             <?php
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
-                    ['label' => 'Adminlar', 'icon' => 'user', 'url' => ['#']],
-                    ['label' => 'O\'qituvchilar', 'icon' => 'user', 'url' => ['#']],
-                    ['label' => 'O\'quvchilar', 'icon' => 'user', 'url' => ['#']],
+                    ['label' => 'Adminlar', 'icon' => 'user', 'url' => ['/user/admins']],
+                    ['label' => 'O\'qituvchilar', 'icon' => 'user', 'url' => ['/user/teachers']],
+                    ['label' => 'O\'quvchilar', 'icon' => 'user', 'url' => ['/user/pupils']],
                     ['label' => 'Zakazlar', 'icon' => 'user', 'url' => ['/order/index']],
                     ['label' => 'Mualliflar', 'icon' => 'user', 'url' => ['/author/index']],
                     ['label' => 'Kurslar', 'icon' => 'list', 'url' => ['/course/index']],

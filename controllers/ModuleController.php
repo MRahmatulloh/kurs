@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Module;
 use app\models\search\ModuleSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -92,8 +93,15 @@ class ModuleController extends Controller
 
         if ($this->request->isPost && $model->load($this->request->post())) {
             if ($model->save()) {
-                return $this->redirect(['course/details', 'id' => $model->course_id]);
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно сохранены'));
+            }else{
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Unable save data. {title}: {errors}', [
+                    'title' => $model->getTitle(),
+                    'errors' => json_encode($model->getErrors()),
+                ]));
             }
+
+            return $this->redirect(['course/details', 'id' => $model->course_id]);
         }
 
         return $this->renderAjax('create_ajax', [

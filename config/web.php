@@ -84,6 +84,9 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'frontend/index',
+                'index' => 'frontend/index',
+                '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
             ],
         ],
     ],
@@ -93,6 +96,7 @@ $config = [
             'site/login',
             'site/logout',
             'site/auth',
+            'frontend/*',
 //            'admin/*',
 //            'some-controller/some-action',
             // The actions listed here will be allowed to everyone including guests.

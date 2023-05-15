@@ -2,33 +2,34 @@
 
 use app\components\Globals;
 use kartik\select2\Select2;
-use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
-use yii\widgets\MaskedInput;
+use yii\bootstrap5\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\Author $model */
+/** @var app\models\Lesson $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="author-form">
+<div class="lesson-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'action' => '/lesson/create-ajax',
+    ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'phone')->widget(MaskedInput::class, [
-        'mask' => '99-999-99-99',
+    <?= $form->field($model, 'file')->fileInput([
+        'class' => 'form-control',
     ]) ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 2]) ?>
 
-    <?= $form->field($model, 'user_id')->widget(Select2::classname(), [
-        'data' => \app\models\User::selectList(),
+    <?= $form->field($model, 'module_id')->widget(Select2::classname(), [
+        'data' => \app\models\Module::selectList(),
         'language' => 'en',
-        'options' => ['placeholder' => 'Foydalanuvchini tanlang ...'],
+        'options' => ['placeholder' => 'Modulni tanlang ...'],
         'pluginOptions' => [
-            'allowClear' => true
+            'allowClear' => true,
         ],
     ]); ?>
 

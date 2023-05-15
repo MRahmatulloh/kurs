@@ -76,6 +76,8 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
+        $ids = Yii::$app->authManager->getUserIdsByRole("Administrator");
+        prd($ids);
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
