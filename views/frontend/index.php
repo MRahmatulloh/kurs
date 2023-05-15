@@ -1,3 +1,11 @@
+<?php
+/* @var $this \yii\web\View */
+/* @var $content string */
+
+$this->title = ' ';
+\app\assets\FrontendAsset::register($this);
+
+?>
 <!doctype html>
 <html lang="en" class="h-100">
 <head>
