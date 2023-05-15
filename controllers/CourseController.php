@@ -86,6 +86,7 @@ class CourseController extends Controller
             'model' => $this->findModel($id),
             'moduleDataProvider' => $moduleDataProvider,
             'lessonDataProvider' => $lessonDataProvider,
+            'searchModule' => $searchModule,
         ]);
     }
 

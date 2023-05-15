@@ -83,7 +83,6 @@ use yii\helpers\Html;
                 <a href="#" class="dropdown-item">
                     Exit
                 </a>
-                <div class="dropdown-divider"></div>
             </div>
         </li>
 

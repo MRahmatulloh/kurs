@@ -81,6 +81,26 @@ class ModuleController extends Controller
         ]);
     }
 
+    public function actionCreateAjax()
+    {
+        $model = new Module();
+
+        if ($this->request->isAjax && $model->load($this->request->post())) {
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            if ($model->save()) {
+                return $this->redirect(['course/details', 'id' => $model->course_id]);
+            }
+        }
+
+        return $this->renderAjax('create_ajax', [
+            'model' => $model,
+        ]);
+    }
+
     /**
      * Updates an existing Module model.
      * If update is successful, the browser will be redirected to the 'view' page.

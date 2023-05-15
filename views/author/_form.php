@@ -22,7 +22,7 @@ use yii\helpers\Html;
 
     <?= $form->field($model, 'user_id')->widget(Select2::classname(), [
         'data' => \app\models\User::selectList(),
-        'language' => 'de',
+        'language' => 'en',
         'options' => ['placeholder' => 'Foydalanuvchini tanlang ...'],
         'pluginOptions' => [
             'allowClear' => true

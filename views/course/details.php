@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Module;
+use yii\bootstrap4\Modal;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -19,9 +20,24 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-6">
             <h4>Modullar</h4>
-            <p>
-                <?= Html::a('Modul qo\'shish', ['/module/create'], ['class' => 'btn btn-success']) ?>
-            </p>
+            <?php
+            Modal::begin([
+                'title' => 'Yangi modul qo\'shish',
+                'toggleButton' => [
+                    'label' => 'Modul qo\'shish',
+                    'tag' => 'button',
+                    'class' => 'btn btn-success',
+                ],
+                'footer' => '',
+            ]);
+            echo $this->renderAjax('/module/create_ajax', [
+                'model' => new Module([
+                    'course_id' => $model->id,
+                ]),
+            ]);
+            Modal::end();
+            ?>
+
             <?= GridView::widget([
                 'dataProvider' => $moduleDataProvider,
 //                'filterModel' => $searchModel,

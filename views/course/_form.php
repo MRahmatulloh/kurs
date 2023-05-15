@@ -22,7 +22,7 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'author_id')->widget(Select2::classname(), [
         'data' => \app\models\Author::selectList(),
-        'language' => 'de',
+        'language' => 'en',
         'options' => ['placeholder' => 'Muallifni tanlang ...'],
         'pluginOptions' => [
             'allowClear' => true

@@ -5,14 +5,16 @@ use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
-/** @var yii\web\View $this */
-/** @var app\models\Module $model */
-/** @var yii\widgets\ActiveForm $form */
+///** @var yii\web\View $this */
+///** @var app\models\Module $model */
+///** @var yii\widgets\ActiveForm $form */
 ?>
 
 <div class="module-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'action' => '/module/create-ajax',
+    ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -23,7 +25,8 @@ use yii\bootstrap5\ActiveForm;
         'language' => 'en',
         'options' => ['placeholder' => 'Kursni tanlang ...'],
         'pluginOptions' => [
-            'allowClear' => true
+            'allowClear' => true,
+            'disabled' => $model->course_id ? true : false,
         ],
     ]); ?>
 

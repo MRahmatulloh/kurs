@@ -40,7 +40,7 @@
                     ['label' => 'O\'quvchilar', 'icon' => 'user', 'url' => ['#']],
                     ['label' => 'Zakazlar', 'icon' => 'user', 'url' => ['/order/index']],
                     ['label' => 'Mualliflar', 'icon' => 'user', 'url' => ['/author/index']],
-                    ['label' => 'Darslar', 'icon' => 'list', 'url' => ['/course/index']],
+                    ['label' => 'Kurslar', 'icon' => 'list', 'url' => ['/course/index']],
                     ['label' => 'Kitoblar', 'icon' => 'book', 'url' => ['/book/index']],
                     ['label' => 'Bloglar', 'icon' => 'blog', 'url' => ['/blog/index']],
 //
