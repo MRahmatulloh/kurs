@@ -29,7 +29,7 @@ $config = [
                     'class' => 'yii\authclient\clients\Google',
                     'clientId' => '860178683131-8p2981qqfgrumfnrqg1bodi86fo50r7l.apps.googleusercontent.com',
                     'clientSecret' => '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',
-                    'returnUrl' => 'http://localhost/site/auth?authclient=google', // add this row
+                    'returnUrl' => 'http://kurs.uznj.uz/site/auth?authclient=google', // add this row
                 ],
                 'facebook' => [
                     'class' => 'yii\authclient\clients\Facebook',

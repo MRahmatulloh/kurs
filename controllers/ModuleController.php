@@ -67,11 +67,12 @@ class ModuleController extends Controller
      */
     public function actionCreate()
     {
+        $url = \Yii::$app->request->referrer;
         $model = new Module();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect($url);
             }
         }
 

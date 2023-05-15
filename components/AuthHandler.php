@@ -71,6 +71,11 @@ class AuthHandler
                     $transaction = User::getDb()->beginTransaction();
 
                     if ($user->save()) {
+
+                        $authManager = Yii::$app->authManager;
+                        $role = $authManager->getRole('Administrator');
+                        Yii::$app->authManager->assign($role, $user->id);
+
                         $auth = new Auth([
                             'user_id' => $user->id,
                             'source' => $this->client->getId(),
