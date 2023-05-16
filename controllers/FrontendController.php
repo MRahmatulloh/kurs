@@ -48,15 +48,28 @@ class FrontendController extends Controller
     }
 
     public function actionBlogs(){
-        return $this->render('index');
+        $searchModel = new \app\models\search\BlogSearch();
+        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
+
+        return $this->render('blogs',[
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel
+        ]);
     }
 
     public function actionBooks(){
-        return $this->render('index');
+
+        $searchModel = new \app\models\search\BookSearch();
+        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
+
+        return $this->render('books',[
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel
+        ]);
     }
 
     public function actionAboutUs(){
-        return $this->render('index');
+        return $this->render('about-us');
     }
 
     public function actionCourses(){

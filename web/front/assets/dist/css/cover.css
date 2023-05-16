@@ -105,6 +105,9 @@ header .active:after {
     transition: all 0.3s ease-in-out;
 }
 
+header.books .active:after {
+}
+
 #navbarsExample05 {
     box-sizing: border-box;
     border-bottom: .125rem solid #012C1B;

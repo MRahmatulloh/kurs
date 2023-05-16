@@ -31,7 +31,7 @@ $this->title = ' ';
         <nav class="navbar nav-masthead navbar-expand-lg navbar-dark bg-transparent"
              aria-label="Fifth navbar example">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/frontend/index">
                     <svg width="130" height="128" viewBox="0 0 130 128" fill="none" class="d-block my-1"
                          xmlns="http://www.w3.org/2000/svg">
                         <path d="M32.9412 22.2666H50.2056C50.2056 22.4826 50.2056 22.6789 50.2056 22.875C50.2082 34.4177 50.1978 45.9604 50.223 57.504C50.2288 60.3718 50.6806 63.1733 51.8334 65.8294C53.2728 69.1416 55.735 71.3821 59.0305 72.7564C60.7222 73.4617 62.4854 73.8783 64.3503 74.0684C64.302 79.8284 64.2539 85.5645 64.2047 91.3833C63.2704 91.3055 62.3862 91.263 61.5098 91.1525C57.4921 90.6451 53.6597 89.505 50.0496 87.6605C44.1032 84.6222 39.6323 80.0991 36.6375 74.1212C34.8364 70.5272 33.753 66.7049 33.3316 62.7159C33.0963 60.4886 32.9611 58.2404 32.9542 56.0016C32.918 44.962 32.9403 33.9233 32.9412 22.8837C32.9412 22.6859 32.9412 22.4887 32.9412 22.2666Z"
@@ -521,11 +521,11 @@ $this->title = ' ';
 
                         <div class="col-12 mt-5 position-relative">
                             <div class="d-flex justify-content-center">
-                                <button class="btn btn-success bg3 my-3 rounded rounded-pill">
+                                <a href="/frontend/books" class="btn btn-success bg3 my-3 rounded rounded-pill">
                                         <span
                                             class="fs-5 px-4">Barchasini ko'rish >>
                                         </span>
-                                </button>
+                                </a>
                             </div>
                             <div class="blur blur4"></div>
                         </div>
@@ -779,11 +779,11 @@ $this->title = ' ';
 
                         <div class="col-12 mt-5 position-relative">
                             <div class="d-flex justify-content-center">
-                                <button class="btn btn-success bg3 my-3 rounded rounded-pill">
+                                <a href="/frontend/blogs" class="btn btn-success bg3 my-3 rounded rounded-pill">
                                         <span
                                             class="fs-5 px-4">Barchasini ko'rish >>
                                         </span>
-                                </button>
+                                </a>
                             </div>
                             <div class="blur blur4"></div>
                         </div>
