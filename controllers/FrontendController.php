@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\components\AuthHandler;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 class FrontendController extends Controller
@@ -25,7 +26,7 @@ class FrontendController extends Controller
             'auth' => [
                 'class' => 'yii\authclient\AuthAction',
                 'successCallback' => [$this, 'onAuthSuccess'],
-                'successUrl'=>'site/index'
+                'successUrl'=>Url::to(['site/index'])
             ],
         ];
     }
