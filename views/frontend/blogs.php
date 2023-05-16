@@ -132,7 +132,7 @@ $this->title = ' ';
                              * @var $blog Blog
                              */
                             foreach ($blogs as $blog):?>
-                                <div class="col-12 bg2 ps-0 m-auto d-inline-flex rounded rounded-2">
+                                <div class="col-12 bg2 ps-0 m-auto mt-3 d-inline-flex rounded rounded-2">
                                     <img src="<?= Yii::getAlias('@web') . '/img/blogs/' . ($blog->photo ?? 'no-photo.png') ?>" width="350px" alt="">
                                     <p class="ms-3 pt-3 text-white text-start">
                                         <?= $blog->title ?>

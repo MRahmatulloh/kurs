@@ -151,7 +151,11 @@ $this->title = ' ';
                             /**
                              * @var $book Book
                              */
-                            foreach ($books as $book):?>
+                            foreach ($books as $key => $book):?>
+                                <?php if ($key % 3 == 0): ?>
+                                    <div class="col-12"></div>
+                                <?php endif; ?>
+
                                 <div class="col-4">
                                     <div class="card">
                                         <div class="card-img d-flex justify-content-center">
