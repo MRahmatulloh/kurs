@@ -104,10 +104,10 @@ $this->title = ' ';
                             <a class="nav-link active" aria-current="page" href="#">Treyding kursi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/frontend/blogs">Bloglar</a>
+                            <a class="nav-link" href="#blogs">Bloglar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/frontend/books">Kitoblar</a>
+                            <a class="nav-link" href="#books">Kitoblar</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/frontend/about-us">Biz haqimizda</a>
@@ -677,10 +677,10 @@ $this->title = ' ';
                             <div class="blur blur2"></div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" id="blogs">
                         <div class="col-12 mb-5">
                             <h1 class="text-center text-white text-uppercase">Treyding haqida bizning blog orqali</h1>
-                            <h1 class="text-center text-white text-uppercase">ma'lumotga ega bo'ling</h1>
+                            <h1 class="text-center text-white text-uppercase" >ma'lumotga ega bo'ling</h1>
                         </div>
                         <?php if ($blogs): ?>
                             <?php
@@ -997,7 +997,7 @@ $this->title = ' ';
 
                         </div>
                     </div>
-                    <div class="row my-5 pt-5">
+                    <div class="row my-5 pt-5"  id="books">
                         <div class="col-12 mb-5">
                             <h1 class="text-center text-white text-uppercase">Kitoblar</h1>
                         </div>
