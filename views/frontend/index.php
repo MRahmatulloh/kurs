@@ -508,7 +508,7 @@ $this->title = ' ';
                                 <div class="col-3">
                                     <div class="card">
                                         <div class="card-img d-flex justify-content-center">
-                                            <img class="card-img-top" src="<?= Yii::getAlias('@web') .'/img/blogs/'.$blog->photo ?>" alt="">
+                                            <img class="card-img-top" src="<?= Yii::getAlias('@web') . '/img/blogs/' . ($blog->photo ?? 'no-photo.png') ?>" alt="">
                                         </div>
                                         <div class="card-body bg2 fs-6">
                                             <p><?= $blog->title ?></p>
@@ -766,7 +766,7 @@ $this->title = ' ';
                                 <div class="col-4">
                                     <div class="card">
                                         <div class="card-img d-flex justify-content-center">
-                                            <img class="card-img-top" src="<?= Yii::getAlias('@web') .'/img/books/'.$book->photo ?>" alt="">
+                                            <img class="card-img-top" src="<?= Yii::getAlias('@web') . '/img/books/' . ($book->photo ?? 'no-photo.png') ?>" alt="">
                                         </div>
                                         <div class="card-body bg2 fs-6">
                                             <p><?= $book->name?></p>
