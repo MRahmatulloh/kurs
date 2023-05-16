@@ -54,10 +54,10 @@
             </div>
             <div class="col-5 d-flex text-start align-items-center">
                 <ol class="list-unstyled text-white">
-                    <li><a href="about.html">Biz haqimizda</a></li>
-                    <li><a href="kurs.html">Kurs haqida</a></li>
-                    <li><a href="bloglar.html">Bloglar</a></li>
-                    <li><a href="kitoblar.html">Online kitoblar</a></li>
+                    <li><a href="/frontend/about-us">Biz haqimizda</a></li>
+                    <li><a href="/frontend/courses">Kurs haqida</a></li>
+                    <li><a href="/frontend/blogs">Bloglar</a></li>
+                    <li><a href="/frontend/books">Online kitoblar</a></li>
                 </ol>
             </div>
             <div class="col-3 d-flex flex-column-reverse align-items-end">

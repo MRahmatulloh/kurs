@@ -2,6 +2,9 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use app\models\Blog;
+use app\models\Book;
+
 $this->title = ' ';
 \app\assets\FrontendAsset::register($this);
 
@@ -82,13 +85,13 @@ $this->title = ' ';
                             <a class="nav-link active" aria-current="page" href="#">Treyding kursi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="bloglar.html">Bloglar</a>
+                            <a class="nav-link" href="/frontend/blogs">Bloglar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="kitoblar.html">Kitoblar</a>
+                            <a class="nav-link" href="/frontend/books">Kitoblar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">Biz haqimizda</a>
+                            <a class="nav-link" href="/frontend/about-us">Biz haqimizda</a>
                         </li>
                     </ul>
                 </div>
@@ -116,7 +119,7 @@ $this->title = ' ';
                             <div class="reg card position-relative">
                                 <h3 class="text-center text-black-50 py-3 fs-1">Profilga kirish</h3>
                                 <div class="card-body px-4">
-                                    <form action="">
+                                    <form action="/site/auth">
                                         <label class="w-100">
                                             <input class="py-1 form-control" type="email" placeholder="E-mail">
                                         </label>
@@ -139,26 +142,12 @@ $this->title = ' ';
                                     <div class="login-via"><span
                                             class="fs-6 text-black-50"> yoki ro'yhatdan o'ting </span></div>
                                     <span class="d-flex justify-content-center">
-                                <div>
-                                    <a class="navbar-brand" href="#">
-                                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                              d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C10.7452 0 0 10.7452 0 24C0 37.2548 10.7452 48 24 48ZM31.2857 27.125H27V42H20.1429V27.125H15V20.125H20.1429V15.2245C20.1429 9.8995 23.4487 7 28.1021 7C30.3309 7 32.4417 7.16949 33 7.24517V13.125H30.4286C27 13.125 27 14.8236 27 16.625V20.125H33L31.2857 27.125Z"
-                                              fill="#344E8F"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a class="navbar-brand" href="#">
-                                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                              d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C10.7452 0 0 10.7452 0 24C0 37.2548 10.7452 48 24 48ZM24.3265 8C17.9442 8 12.423 11.5855 9.73656 16.8146C8.63083 18.9746 8 21.4182 8 24C8 26.5818 8.63083 29.0254 9.73656 31.1854C12.423 36.4146 17.9442 40 24.3265 40C28.7347 40 32.4304 38.5674 35.1316 36.1237C38.2189 33.3381 40 29.2363 40 24.3637C40 23.2291 39.8962 22.1381 39.703 21.0909H24.3265V27.28H33.1131C32.7347 29.28 31.5843 30.9746 29.8553 32.1091C28.3933 33.0691 26.5231 33.6363 24.3265 33.6363C20.0742 33.6363 16.4748 30.8218 15.1911 27.04C14.8645 26.08 14.679 25.0546 14.679 24C14.679 22.9454 14.8645 21.92 15.1911 20.96C16.4748 17.1782 20.0742 14.3636 24.3265 14.3636C26.7234 14.3636 28.8758 15.171 30.5677 16.7564L35.2505 12.1673C32.4229 9.58552 28.7272 8 24.3265 8Z"
-                                              fill="#B34747"/>
-                                        </svg>
-                                    </a>
-                                </div>
+                                        <?= yii\authclient\widgets\AuthChoice::widget([
+                                            'baseAuthUrl' => ['frontend/auth'],
+                                            'options' => [
+                                                'class' => 'd-flex justify-content-center'
+                                            ],
+                                        ]); ?>
                             </span>
                                 </div>
                                 <div class="blur blur3"></div>
@@ -510,54 +499,25 @@ $this->title = ' ';
                             <h1 class="text-center text-white text-uppercase">Treyding haqida bizning blog orqali</h1>
                             <h1 class="text-center text-white text-uppercase">ma'lumotga ega bo'ling</h1>
                         </div>
-                        <div class="col-3">
-                            <div class="card">
-                                <div class="card-img d-flex justify-content-center">
-                                    <img class="card-img-top" src="https://picsum.photos/seed/picsum/400/300" alt="">
+                        <?php if ($blogs): ?>
+                            <?php
+                            /**
+                             * @var $blog Blog
+                             */
+                            foreach ($blogs as $blog):?>
+                                <div class="col-3">
+                                    <div class="card">
+                                        <div class="card-img d-flex justify-content-center">
+                                            <img class="card-img-top" src="<?= Yii::getAlias('@web') .'/img/blogs/'.$blog->photo ?>" alt="">
+                                        </div>
+                                        <div class="card-body bg2 fs-6">
+                                            <p><?= $blog->title ?></p>
+                                            <p><?= $blog->text ?></p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-body bg2 fs-6">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci illo in
-                                        nostrum ratione
-                                        rem, voluptate?</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="card">
-                                <div class="card-img d-flex justify-content-center">
-                                    <img class="card-img-top" src="https://picsum.photos/seed/picsum/400/300" alt="">
-                                </div>
-                                <div class="card-body bg2 fs-6">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci illo in
-                                        nostrum ratione
-                                        rem, voluptate?</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="card">
-                                <div class="card-img d-flex justify-content-center">
-                                    <img class="card-img-top" src="https://picsum.photos/seed/picsum/400/300" alt="">
-                                </div>
-                                <div class="card-body bg2 fs-6">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci illo in
-                                        nostrum ratione
-                                        rem, voluptate?</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="card">
-                                <div class="card-img d-flex justify-content-center">
-                                    <img class="card-img-top" src="https://picsum.photos/seed/picsum/400/300" alt="">
-                                </div>
-                                <div class="card-body bg2 fs-6">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci illo in
-                                        nostrum ratione
-                                        rem, voluptate?</p>
-                                </div>
-                            </div>
-                        </div>
+                            <?php endforeach;?>
+                        <?php endif;?>
 
                         <div class="col-12 mt-5 position-relative">
                             <div class="d-flex justify-content-center">
@@ -644,6 +604,7 @@ $this->title = ' ';
                         <div class="col-3">
                             <div class="w-100 text-center">
                                 <span class="tc1">1</span>
+                                <span> </span>
                                 <p class="fs-3 py-3">   Roʻyxatdan oʻting  </p>
                                 <p class="text-muted">       Bu bir necha daqiqa vaqt oladi!      </p>
                             </div>
@@ -651,6 +612,7 @@ $this->title = ' ';
                         <div class="col-3">
                             <div class="w-100 text-center">
                                 <span class="tc1">2</span>
+                                <span> </span>
                                 <p class="fs-3 py-3">      Bilim Oling     </p>
                                 <p class="text-muted">Olgan bilimingiz hayotingizni tubdan o’zgartiradi</p>
                             </div>
@@ -658,6 +620,7 @@ $this->title = ' ';
                         <div class="col-3">
                             <div class="w-100 text-center">
                                 <span class="tc1">3</span>
+                                <span> </span>
                                 <p class="fs-3 py-3">Maqsadingizga erishing</p>
                                 <p class="text-muted">      Qarorni kechiktirishning ma'nosi yo'q    </p>
                             </div>
@@ -794,45 +757,26 @@ $this->title = ' ';
                         <div class="col-12 mb-5">
                             <h1 class="text-center text-white text-uppercase">Kitoblar</h1>
                         </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-img d-flex justify-content-center">
-                                    <img class="card-img-top" src="https://picsum.photos/id/820/400/300?random=1"
-                                         alt="">
+                        <?php if ($books): ?>
+                            <?php
+                            /**
+                             * @var $book Book
+                             */
+                            foreach ($books as $book):?>
+                                <div class="col-4">
+                                    <div class="card">
+                                        <div class="card-img d-flex justify-content-center">
+                                            <img class="card-img-top" src="<?= Yii::getAlias('@web') .'/img/books/'.$book->photo ?>" alt="">
+                                        </div>
+                                        <div class="card-body bg2 fs-6">
+                                            <p><?= $book->name?></p>
+                                            <p><?= $book->description ?></p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-body bg2 fs-6">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci illo in
-                                        nostrum ratione
-                                        rem, voluptate?</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-img d-flex justify-content-center">
-                                    <img class="card-img-top" src="https://picsum.photos/id/820/400/300?random=1"
-                                         alt="">
-                                </div>
-                                <div class="card-body bg2 fs-6">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci illo in
-                                        nostrum ratione
-                                        rem, voluptate?</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-img d-flex justify-content-center">
-                                    <img class="card-img-top" src="https://picsum.photos/id/820/400/300?random=1"
-                                         alt="">
-                                </div>
-                                <div class="card-body bg2 fs-6">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci illo in
-                                        nostrum ratione
-                                        rem, voluptate?</p>
-                                </div>
-                            </div>
-                        </div>
+                            <?php endforeach;?>
+                        <?php endif;?>
+
                         <div class="col-12 mt-5 position-relative">
                             <div class="d-flex justify-content-center">
                                 <button class="btn btn-success bg3 my-3 rounded rounded-pill">
@@ -1229,6 +1173,6 @@ $this->title = ' ';
 
 </div>
 
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?= Yii::getAlias('@web')?>/front/assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
