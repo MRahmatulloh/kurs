@@ -119,7 +119,7 @@ $this->title = ' ';
                             <div class="reg card position-relative">
                                 <h3 class="text-center text-black-50 py-3 fs-1">Profilga kirish</h3>
                                 <div class="card-body px-4">
-                                    <form action="/site/auth">
+                                    <form action="/site/login">
                                         <label class="w-100">
                                             <input class="py-1 form-control" type="email" placeholder="E-mail">
                                         </label>

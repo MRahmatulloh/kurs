@@ -41,7 +41,7 @@ use yii\bootstrap4\Breadcrumbs;
         <div class="alert alert-success alert-dismissable">
             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
             <h5><i class="icon fa fa-check"></i>
-                <?= Yii::$app->session->getFlash('success') ?>
+                <?= json_encode(Yii::$app->session->getFlash('success')) ?>
             </h5>
         </div>
     <?php endif; ?>
@@ -50,7 +50,7 @@ use yii\bootstrap4\Breadcrumbs;
         <div class="alert alert-danger alert-dismissable">
             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
             <h5><i class="icon fa fa-exclamation"></i>
-                <?= Yii::$app->session->getFlash('error') ?>
+                <?= json_encode(Yii::$app->session->getFlash('error')) ?>
             </h5>
         </div>
     <?php endif; ?>

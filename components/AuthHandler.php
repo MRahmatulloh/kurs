@@ -50,6 +50,7 @@ class AuthHandler
                 $user = $auth->user;
                 $this->updateUserInfo($user);
                 Yii::$app->user->login($user, Yii::$app->params['user.rememberMeDuration'] ?? 1800);
+
             } else { // signup
                 $existingUser = User::find()->where(['email' => $email])->exists();
                 if ($existingUser) {
