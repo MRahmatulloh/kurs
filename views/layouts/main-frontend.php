@@ -6,5 +6,8 @@ $this->title = ' ';
 \app\assets\FrontendAsset::register($this);
 
 ?>
-<?= $this->render('content', ['content' => $content]) ?>
+<div class="m-auto">
+    <?= $this->render('content', ['content' => $content]) ?>
+</div>
+
 <?= $this->render('footer-origin') ?>
