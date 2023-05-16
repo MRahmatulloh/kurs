@@ -153,7 +153,7 @@ $this->title = ' ';
                              */
                             foreach ($books as $key => $book):?>
                                 <?php if ($key % 3 == 0): ?>
-                                    <div class="col-12 mb-3"></div>
+                                    <div class="col-12 mb-4"></div>
                                 <?php endif; ?>
 
                                 <div class="col-4">
