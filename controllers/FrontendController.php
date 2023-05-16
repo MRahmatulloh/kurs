@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\components\AuthHandler;
+use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
 
@@ -37,13 +38,21 @@ class FrontendController extends Controller
     }
 
     public function actionIndex(){
+        $loginForm = new \app\models\LoginForm();
+
+        if (\Yii::$app->request->isPost && $loginForm->load(Yii::$app->request->post()) && $loginForm->login()) {
+            return $this->redirect(['site/index']);
+        }
+        $loginForm->password = '';
+
 
         $books = \app\models\Book::find()->orderBy('id desc')->limit(3)->all();
         $blogs = \app\models\Blog::find()->orderBy('id desc')->limit(4)->all();
 
         return $this->render('index',[
             'books' => $books,
-            'blogs' => $blogs
+            'blogs' => $blogs,
+            'loginForm' => $loginForm
         ]);
     }
 
