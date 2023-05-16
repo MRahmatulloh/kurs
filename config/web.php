@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$_SERVER['SERVER_PORT'] = '443';
 
 $config = [
     'id' => 'basic',
