@@ -38,8 +38,8 @@ class FrontendController extends Controller
 
     public function actionIndex(){
 
-        $books = \app\models\Book::find()->orderBy('id desc')->limit(4)->all();
-        $blogs = \app\models\Blog::find()->orderBy('id desc')->limit(3)->all();
+        $books = \app\models\Book::find()->orderBy('id desc')->limit(3)->all();
+        $blogs = \app\models\Blog::find()->orderBy('id desc')->limit(4)->all();
 
         return $this->render('index',[
             'books' => $books,
