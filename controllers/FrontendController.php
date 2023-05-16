@@ -25,8 +25,7 @@ class FrontendController extends Controller
             'auth' => [
                 'class' => 'yii\authclient\AuthAction',
                 'successCallback' => [$this, 'onAuthSuccess'],
-                'redirectView' =>
-                    'site/index'
+                'successUrl'=>'site/index'
             ],
         ];
     }
