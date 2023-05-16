@@ -52,6 +52,7 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
+            'loginUrl' => array('frontend/index'),
             'enableAutoLogin' => false,
             'authTimeout' => 30 * 60,
         ],
