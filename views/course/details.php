@@ -62,12 +62,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     'name',
 
-                    [
-                        'class' => ActionColumn::className(),
-                        'urlCreator' => function ($action, Module $model, $key, $index, $column) {
-                            return Url::toRoute([$action, 'id' => $model->id]);
-                        }
-                    ],
+//                    [
+//                        'class' => ActionColumn::className(),
+//                        'urlCreator' => function ($action, Module $model, $key, $index, $column) {
+//                            return Url::toRoute([$action, 'id' => $model->id]);
+//                        }
+//                    ],
                 ],
             ]); ?>
         </div>
@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]);
             echo $this->renderAjax('/lesson/create_ajax', [
                 'model' => new Lesson([
-                    'module_id' => $model->id,
+                    'module_id' => $module_id,
                 ]),
             ]);
             Modal::end();
@@ -100,12 +100,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     'name',
 
-                    [
-                        'class' => ActionColumn::className(),
-                        'urlCreator' => function ($action, Lesson $model, $key, $index, $column) {
-                            return Url::toRoute([$action, 'id' => $model->id]);
-                        }
-                    ],
+//                    [
+//                        'class' => ActionColumn::className(),
+//                        'urlCreator' => function ($action, Lesson $model, $key, $index, $column) {
+//                            return Url::toRoute([$action, 'id' => $model->id]);
+//                        }
+//                    ],
                 ],
             ]); ?>
         </div>
@@ -113,13 +113,27 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <?php
-$this->registerJs("
 
-    $('td.link').click(function (e) {
+$url = Url::to(['']);
+
+$js = <<<JS
+let url = '$url';
+$(document).ready(function() {
+
+    $('tr.link').click(function (e) {
         var id = $(this).closest('tr').data('id');
         var course_id = $(this).closest('tr').data('course_id');
-        if(e.target == this)
-            location.href = '" . Url::to(['']) . "?id=' + course_id + '&module_id=' + id;
+
+        if(e.target.parentNode == this){
+            let newUrl = url + '?id=' + course_id + '&module_id=' + id;
+            console.log(newUrl);
+             location.href = newUrl;
+        }
+
     });
 
-");
+});
+JS;
+
+$this->registerJs($js);
+?>

@@ -89,7 +89,8 @@ class CourseController extends Controller
             'moduleDataProvider' => $moduleDataProvider,
             'lessonDataProvider' => $lessonDataProvider,
             'searchModule' => $searchModule,
-            'module_name' => $module_name
+            'module_name' => $module_name,
+            'module_id' => $module_id,
         ]);
     }
 
