@@ -355,3 +355,6 @@ footer a:focus{
     list-style: none;
     margin: 20px;
 }
+ul.auth-clients{
+    padding: 0;
+}

@@ -1,5 +1,6 @@
 <?php
 
+use app\components\Globals;
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
@@ -12,21 +13,15 @@ use yii\bootstrap5\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'uuid')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'user_id')->textInput() ?>
-
-    <?= $form->field($model, 'wants')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'wants_id')->textInput() ?>
-
-        <?= $form->field($model, 'status')->dropDownList(Globals::getStatuses(), [
+    <?= $form->field($model, 'wants')->dropDownList($model::WANTS, [
         'class' => 'form-control',
     ]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+    <?= $form->field($model, 'wants_id')->textInput() ?>
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList(Globals::getStatuses(), [
+        'class' => 'form-control',
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Saqlash', ['class' => 'btn btn-success']) ?>

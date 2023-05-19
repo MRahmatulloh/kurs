@@ -19,6 +19,10 @@ use yii\behaviors\TimestampBehavior;
  */
 class Order extends \yii\db\ActiveRecord
 {
+    public const WANTS = [
+        'course' => 'Kurs',
+        'book' => 'Kitob',
+    ];
     /**
      * {@inheritdoc}
      */
@@ -43,7 +47,7 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id'], 'required'],
+            [['uuid', 'user_id', 'wants_id', 'wants'], 'required'],
             [['user_id', 'wants_id', 'status', 'created_at', 'updated_at'], 'integer'],
             [['uuid', 'wants'], 'string', 'max' => 255],
         ];
@@ -56,10 +60,10 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'uuid' => 'Uuid',
-            'user_id' => 'User ID',
-            'wants' => 'Wants',
-            'wants_id' => 'Wants ID',
+            'uuid' => 'UUID',
+            'user_id' => 'Buyurtmachi',
+            'wants' => 'Buyurtma turi',
+            'wants_id' => 'Buyurtma',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

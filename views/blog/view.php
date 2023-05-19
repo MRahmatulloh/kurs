@@ -28,7 +28,8 @@ $this->params['breadcrumbs'][] = substr($model->title, 0, 35) . '...';
     <div class="row">
         <div class="col-4">
             <div class="card-img d-flex justify-content-center m-auto">
-                <img class="card-img-top" src="<?= Yii::getAlias('@web') . '/img/blogs/' . ($model->photo ?? 'no-photo.png') ?>"
+                <img
+                     src="<?= Yii::getAlias('@web') . '/img/blogs/' . ($model->photo ?? 'no-photo.png') ?>" width="400"
                      alt="">
             </div>
         </div>
@@ -57,7 +58,6 @@ $this->params['breadcrumbs'][] = substr($model->title, 0, 35) . '...';
             ]) ?>
         </div>
     </div>
-
 
 
 </div>

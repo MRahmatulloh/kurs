@@ -7,13 +7,13 @@ use yii\widgets\DetailView;
 /** @var app\models\Order $model */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Buyurtmalar', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="order-view">
 
-    <p>
+    <p class="text-end">
         <?= Html::a('Yangilash', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('O\'chirish', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',

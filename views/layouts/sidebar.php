@@ -35,14 +35,14 @@
             <?php
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
-                    ['label' => 'Adminlar', 'icon' => 'user', 'url' => ['/user/admins']],
-                    ['label' => 'O\'qituvchilar', 'icon' => 'user', 'url' => ['/user/teachers']],
-                    ['label' => 'O\'quvchilar', 'icon' => 'user', 'url' => ['/user/pupils']],
-                    ['label' => 'Zakazlar', 'icon' => 'user', 'url' => ['/order/index']],
-                    ['label' => 'Mualliflar', 'icon' => 'user', 'url' => ['/author/index']],
-                    ['label' => 'Kurslar', 'icon' => 'list', 'url' => ['/course/index']],
+                    ['label' => 'Adminlar', 'icon' => 'user-shield', 'url' => ['/user/admins']],
+                    ['label' => 'O\'qituvchilar', 'icon' => 'user-graduate', 'url' => ['/user/teachers']],
+                    ['label' => 'O\'quvchilar', 'icon' => 'users', 'url' => ['/user/pupils']],
+                    ['label' => 'Buyurtmalar', 'icon' => 'cart-plus', 'url' => ['/order/index']],
+                    ['label' => 'Mualliflar', 'icon' => 'person-booth', 'url' => ['/author/index']],
+                    ['label' => 'Kurslar', 'icon' => 'clipboard-list', 'url' => ['/course/index']],
                     ['label' => 'Kitoblar', 'icon' => 'book', 'url' => ['/book/index']],
-                    ['label' => 'Bloglar', 'icon' => 'blog', 'url' => ['/blog/index']],
+                    ['label' => 'Bloglar', 'icon' => 'rss', 'url' => ['/blog/index']],
 //
 //                    ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
 //                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
