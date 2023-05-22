@@ -110,9 +110,8 @@ class LessonController extends Controller
             }
 
             return $this->redirect([
-                'course/details',
-                'id' => $model->module->course_id,
-                'module_id' => $model->module_id
+                'module/index',
+                'id' => $model->module_id
             ]);
         }
 

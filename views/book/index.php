@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-4">
                     <div class="card">
                         <div class="card-img d-flex justify-content-center">
-                            <img class="card-img-top" src="<?= Yii::getAlias('@web') . '/img/books/' . $book->photo ?>"
+                            <img class="card-img-top" src="<?= Yii::getAlias('@web') . '/img/books/' . ($book->photo ?? 'no-photo.png') ?>"
                                  alt="">
                         </div>
                         <div class="card-body bg3 fs-6 text-white text-start">

@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
     .active td {
         background: #03F291!important;
         font-weight: bold;
-        color: white !important;
+        color: black !important;
     }
 
     .table-striped > tbody > tr.link:nth-of-type(odd) > *:hover {

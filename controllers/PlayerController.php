@@ -10,10 +10,11 @@ class PlayerController extends Controller
 {
     public function actionPlay($id = null)
     {
+        $lesson = \app\models\Lesson::findOne($id);
 //        Yii::$app->response->format = Yii::$app->response::FORMAT_RAW;
 //        Yii::$app->response->headers->set('Content-Type: video/mp4');
 //        Yii::$app->response->stream = Yii::$app->fs->readStream('');
-        $videoPath = 'IMG_8759.mp4';
+        $videoPath = Yii::getAlias('@app') . '/files/lessons/' . $lesson->filename;
 //
 //// Set the appropriate headers
 //        header('Content-Type: video/mp4');

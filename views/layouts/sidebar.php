@@ -40,7 +40,7 @@
                     ['label' => 'O\'quvchilar', 'icon' => 'users', 'url' => ['/user/pupils']],
                     ['label' => 'Buyurtmalar', 'icon' => 'cart-plus', 'url' => ['/order/index']],
                     ['label' => 'Mualliflar', 'icon' => 'person-booth', 'url' => ['/author/index']],
-                    ['label' => 'Kurslar', 'icon' => 'clipboard-list', 'url' => ['/course/index']],
+                    ['label' => 'Darslar', 'icon' => 'clipboard-list', 'url' => ['/module/index']],
                     ['label' => 'Kitoblar', 'icon' => 'book', 'url' => ['/book/index']],
                     ['label' => 'Bloglar', 'icon' => 'rss', 'url' => ['/blog/index']],
 //

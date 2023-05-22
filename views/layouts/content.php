@@ -9,7 +9,7 @@ use yii\bootstrap4\Breadcrumbs;
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">
+                    <h1 class="m-0 fs-2" style="color: rgba(13, 53, 17, .9);">
                         <?php
                         if (!is_null($this->title)) {
                             echo \yii\helpers\Html::encode($this->title);
@@ -18,6 +18,9 @@ use yii\bootstrap4\Breadcrumbs;
                         }
                         if ($this->params['count'] ?? false) {
                             echo '      Soni: ' . \yii\helpers\Html::encode($this->params['count']);
+                        }
+                        if ($this->params['count_with_title'] ?? false) {
+                            echo '      ' . \yii\helpers\Html::encode($this->params['count_with_title']);
                         }
                         ?>
                     </h1>

@@ -15,14 +15,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
 \app\assets\AppAsset::register($this);
 ?>
+<link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet"/>
 <style>
-    .bg-site-primary{
-        background: rgba(13, 53, 17, .9)!important;
-        color: white!important;
+    .bg-site-primary {
+        background: rgba(13, 53, 17, .9) !important;
+        color: white !important;
     }
+
     .bg2 {
         background-color: #0D3511;
     }
+
     .bg3 {
         background-color: #1F4323;
     }
@@ -33,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </style>
 
 <div class="module-index">
+
     <?php
     if ($lesson_id): ?>
         <div class="col-9 m-auto">
@@ -65,6 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     <?php endif; ?>
+
     <div class="col-8 m-auto">
         <div class="container">
             <div class="row">
@@ -86,23 +91,25 @@ $this->params['breadcrumbs'][] = $this->title;
                     </span>
                     <div class="collapse" id="<?= "module" . $module->id ?>">
                         <?php foreach ($module->lessons as $lessons): ?>
-                        <div class="wrappere pl-2" style="border-left: 10px solid rgba(13, 53, 17, .9); border-radius: 10px">
-                            <div class="card card-body py-2 bg-site-primary ">
+                            <div class="wrappere pl-2"
+                                 style="border-left: 10px solid rgba(13, 53, 17, .9); border-radius: 10px">
+                                <div class="card card-body py-2 bg-site-primary ">
                                 <span class="w-100 d-flex justify-content-between align-items-center rounded">
                                     <span class="fs-6"><?= $lessons->name ?></span>
                                     <span class="text-right d-inline-block">
                                                 <div>
-                                                    <?= Html::a('<i class="fa fa-eye text-white"></i>', ['index', 'lesson_id' => $lessons->id], ['class' => 'btn btn-white white', 'title' => 'Ko\'rish']) ?>
+                                                    <?= Html::a('<i class="fa fa-eye text-white"></i>', ['module/watch', 'lesson_id' => $lessons->id], ['class' => 'btn btn-white white', 'title' => 'Ko\'rish']) ?>
                                                     <?= Html::a('<i class="fa fa-pen text-white"></i>', ['update', 'id' => $module->id], ['class' => 'btn btn-white white', 'title' => 'Yangilash']) ?>
                                                     <?= Html::a('<i class="fa fa-trash text-white"></i>', ['delete', 'id' => $module->id], ['class' => 'btn btn-white white', 'title' => 'O\'chirish', 'data-method' => 'post', 'data-confirm' => Yii::t('yii', 'Вы уверены, что хотите удалить этот элемент?'),]) ?>
                                                 </div>
                                     </span>
                                 </span>
+                                </div>
                             </div>
-                        </div>
 
                         <?php endforeach; ?>
-                        <div class="wrappere pl-2" style="border-left: 10px solid rgba(13, 53, 17, .9); border-radius: 10px">
+                        <div class="wrappere pl-2"
+                             style="border-left: 10px solid rgba(13, 53, 17, .9); border-radius: 10px">
                             <div class="card card-body py-2 bg-site-primary">
                                 <span class="w-100 my-1 d-flex justify-content-end align-items-center rounded">
                                 <span class="d-inline-block">
@@ -148,9 +155,10 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 </div>
 
+<script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
+
 <?php
 $script = <<< JS
-let id = '$id';
 $(function() {
     $(document).on('click', '.showModalButton', function() {
 

@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-4">
             <div class="card-img d-flex justify-content-center m-auto">
-                <img  src="<?= '/img/books/' . ($model->photo ?? 'no-photo.png') ?>" width="400"
+                <img  src="<?= '/img/books/' . ($model->photo ?? 'no-photo.png') ?>" width="400px"
                      alt="">
             </div>
         </div>

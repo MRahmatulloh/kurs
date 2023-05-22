@@ -37,14 +37,32 @@ class ModuleController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($id = null, $lesson_id = null)
     {
         $searchModel = new ModuleSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $lesson = \app\models\Lesson::findOne($lesson_id);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'id' => $id,
+            'lesson_id' => $lesson_id,
+            'lesson' => $lesson,
+        ]);
+    }
+
+    public function actionWatch($lesson_id = null)
+    {
+        $searchModel = new ModuleSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+        $lesson = \app\models\Lesson::findOne($lesson_id);
+
+        return $this->render('watch', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'lesson_id' => $lesson_id,
+            'lesson' => $lesson,
         ]);
     }
 
@@ -68,12 +86,11 @@ class ModuleController extends Controller
      */
     public function actionCreate()
     {
-        $url = \Yii::$app->request->referrer;
         $model = new Module();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect($url);
+                return $this->redirect('index');
             }
         }
 

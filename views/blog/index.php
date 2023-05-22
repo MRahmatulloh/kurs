@@ -34,9 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 foreach ($dataProvider->getModels() as $blog): ?>
 
                     <div class="col-3 mb-3 pr-0">
-                        <img src="<?= '/img/blogs/' . $blog->photo ?>" class="card-img-top h-100" alt="">
+                        <img src="<?= '/img/blogs/' . ($blog->photo  ?? 'no-photo.png') ?>" class="card-img-top h-100" alt="">
                     </div>
-                    <div class="col-9 mb-3 pt-2 pl-2 pl-0 rounded-right bg-site-primary text-white">
+                    <div class="col-9 mb-3 pt-2 pl-2 pl-0 rounded-right bg-site-primary text-white d-flex justify-content-between flex-column">
                         <h5><?= $blog->title ?? '' ?></h5>
                         <p class="">
                             <?= $blog->text ?? '' ?>

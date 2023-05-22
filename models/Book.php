@@ -52,7 +52,7 @@ class Book extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'filename'], 'required'],
+            [['name', 'file'], 'required'],
             [['description'], 'string'],
             [['price'], 'number'],
             [['author_id', 'status'], 'integer'],

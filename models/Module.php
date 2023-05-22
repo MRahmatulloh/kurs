@@ -12,7 +12,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $id
  * @property string $name
  * @property string|null $description
- * @property int $course_id
+ * @property int|null $course_id
  * @property int|null $status
  * @property int $created_at
  * @property int $updated_at
@@ -58,7 +58,7 @@ class Module extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'course_id'], 'required'],
+            [['name'], 'required'],
             [['description'], 'string'],
             [['course_id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 255],
