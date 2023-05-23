@@ -15,12 +15,39 @@ $this->params['count'] = count($dataProvider->getModels());
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <style>
+    .bg-site-primary {
+        background: rgba(13, 53, 17, .9) !important;
+        color: white !important;
+    }
+
+    .bg-site-dark {
+        background: rgba(0, 0, 0, .6) !important;
+        color: white !important;
+    }
+
+    .bg7 {
+        background-color: rgba(1, 19, 13, .3);
+    }
+    .trade {
+        font-size: 24px;
+        color: #03F291;
+        text-transform: uppercase;
+    }
+
     .bg3 {
         background-color: #1F4323;
     }
 
     .bg4 {
         background-color: #1f5022;
+    }
+    .title-bar{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    .section-buy{
+        padding-bottom: 220px;
     }
 </style>
 <div class="book-index container">
@@ -89,6 +116,21 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="card h-100 d-flex flex-row justify-content-center align-items-center py-5">
                             <?= Html::a('<i class="fa fa-7x fa-fw fa-plus text-white"></i>', ['create'], ['class' => 'btn btn-light border-0 text-center img-circle elevation-3 bg-gray', 'title' => 'Qo\'shish']) ?>
                         </div>
+                    </div>
+                <?php else: ?>
+                    <div class="col-12 text-center section-buy">
+                        <div class="d-flex justify-content-center my-5">
+                            <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">
+                                <input type="hidden" name="wants" value="course"/>
+                                <input type="hidden" name="id" value="6d81cd8c-b0c1-4122-95bb-ce1a30f2644d"/>
+                                <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
+                                <button class="btn btn-success my-3 rounded rounded-pill fs-3 px-4" type="submit">Kursni sotib olish</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-12 text-center py-5 bg7 title-bar">
+                        <h1 class="text-white">Biz bilan birga rivojlaning</h1>
+                        <h1 class="trade fs-1">Uzscool invest!</h1>
                     </div>
                 <?php endif; ?>
             </div>
