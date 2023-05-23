@@ -52,7 +52,7 @@ class Book extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'file'], 'required'],
+            [['name'], 'required'],
             [['description'], 'string'],
             [['price'], 'number'],
             [['author_id', 'status'], 'integer'],
@@ -71,7 +71,7 @@ class Book extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'uuid' => 'UUID',
+            'uuid' => '№',
             'price' => 'Narxi',
             'name' => 'Nomi',
             'file' => 'Fayl',

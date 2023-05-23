@@ -14,7 +14,7 @@ class UserController extends Controller
 
     public function actionAdmins()
     {
-        $ids = Yii::$app->authManager->getUserIdsByRole("Administrator");
+        $ids = Yii::$app->authManager->getUserIdsByRole("admin");
         $searchModel = new UserSearch();
         $query = User::find()->where(['id' => $ids]);
         $dataProvider = new ActiveDataProvider([
@@ -30,7 +30,7 @@ class UserController extends Controller
 
     public function actionTeachers()
     {
-        $ids = Yii::$app->authManager->getUserIdsByRole("Teacher");
+        $ids = Yii::$app->authManager->getUserIdsByRole("teacher");
         $searchModel = new UserSearch();
         $query = User::find()->where(['id' => $ids]);
         $dataProvider = new ActiveDataProvider([
@@ -46,7 +46,7 @@ class UserController extends Controller
 
     public function actionPupils()
     {
-        $ids = Yii::$app->authManager->getUserIdsByRole("Pupil");
+        $ids = Yii::$app->authManager->getUserIdsByRole("pupil");
         $searchModel = new UserSearch();
         $query = User::find()->where(['id' => $ids]);
         $dataProvider = new ActiveDataProvider([

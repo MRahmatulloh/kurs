@@ -8,6 +8,7 @@ use app\models\Book;
 
 $this->title = ' ';
 \app\assets\FrontendAsset::register($this);
+\app\assets\AppAsset::register($this);
 
 ?>
 <!doctype html>
@@ -680,7 +681,7 @@ $this->title = ' ';
                     <div class="row" id="blogs">
                         <div class="col-12 mb-5">
                             <h1 class="text-center text-white text-uppercase">Treyding haqida bizning blog orqali</h1>
-                            <h1 class="text-center text-white text-uppercase" >ma'lumotga ega bo'ling</h1>
+                            <h1 class="text-center text-white text-uppercase">ma'lumotga ega bo'ling</h1>
                         </div>
                         <?php if ($blogs): ?>
                             <?php
@@ -696,8 +697,8 @@ $this->title = ' ';
                                                  alt="">
                                         </div>
                                         <div class="card-body bg2 fs-6">
-                                            <p><?= $blog->title ?></p>
-                                            <p><?= $blog->text ?></p>
+                                            <p class="h5 text-center"><?= $blog->title ?></p>
+                                            <p style="text-align: justify;"><?= strlen($blog->text) > 250 ? substr($blog->text, 0, 250) . '...' : $blog->text ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -706,9 +707,9 @@ $this->title = ' ';
 
                         <div class="col-12 mt-5 position-relative">
                             <div class="d-flex justify-content-center">
-                                <a href="/frontend/books" class="btn btn-success bg3 my-3 rounded rounded-pill">
+                                <a href="/frontend/blogs" class="btn btn-success bg3 my-3 rounded rounded-pill">
                                         <span
-                                            class="fs-5 px-4">Barchasini ko'rish >>
+                                            class="fs-5 px-4">Barchasini ko'rish >
                                         </span>
                                 </a>
                             </div>
@@ -997,7 +998,7 @@ $this->title = ' ';
 
                         </div>
                     </div>
-                    <div class="row my-5 pt-5"  id="books">
+                    <div class="row my-5 pt-5" id="books">
                         <div class="col-12 mb-5">
                             <h1 class="text-center text-white text-uppercase">Kitoblar</h1>
                         </div>
@@ -1014,9 +1015,27 @@ $this->title = ' ';
                                                  src="<?= Yii::getAlias('@web') . '/img/books/' . ($book->photo ?? 'no-photo.png') ?>"
                                                  alt="">
                                         </div>
-                                        <div class="card-body bg2 fs-6">
-                                            <p><?= $book->name ?></p>
-                                            <p><?= $book->description ?></p>
+                                        <div class="card-body bg3 fs-5 text-white text-start">
+                                            <p class="h5 text-center"><?= $book->name ?></p>
+                                            <p style="text-align: justify;"><?= strlen($book->description) > 250 ? substr($book->description, 0, 250) . '...' : $book->description ?></p>
+                                            <span class="d-flex justify-content-between">
+                                                <?php if ($book->price): ?>
+                                                    <span class=""><?= pul2($book->price, 2) . ' so\'m' ?></span>
+                                                    <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">
+                                                      <input type="hidden" name="wants" value="book"/>
+                                                      <input type="hidden" name="id" value="<?= $book->uuid ?>"/>
+                                                      <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
+                                                      <button class="btn text-white btn btn-success fs-5" type="submit">Sotib olish</button>
+                                                    </form>
+                                                <? else: ?>
+                                                    <span style="color: #05C979">Bepul</span>
+                                                    <form method="post" action="<?= \yii\helpers\Url::to(['book/download']) ?>">
+                                                      <input type="hidden" name="id" value="<?= $book->uuid ?>"/>
+                                                      <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
+                                                      <button class="btn text-white btn btn-success fs-5" type="submit">Yuklab olish</button>
+                                                    </form>
+                                                <? endif; ?>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -1025,9 +1044,9 @@ $this->title = ' ';
 
                         <div class="col-12 mt-5 position-relative">
                             <div class="d-flex justify-content-center">
-                                <a href="/frontend/blogs" class="btn btn-success bg3 my-3 rounded rounded-pill">
+                                <a href="/frontend/books" class="btn btn-success bg3 my-3 rounded rounded-pill">
                                         <span
-                                            class="fs-5 px-4">Barchasini ko'rish >>
+                                            class="fs-5 px-4">Barchasini ko'rish ><i class="fa fa-angle-right"></i>
                                         </span>
                                 </a>
                             </div>
@@ -1042,11 +1061,12 @@ $this->title = ' ';
                                 PROFESSIONAL</h3>
                             <h3 class="text-center text-white text-uppercase">TREYDERGA AYLANING!</h3>
                             <div class="d-flex justify-content-center my-5">
-                                <button class="btn btn-success my-3 rounded rounded-pill">
-                                        <span
-                                            class="fs-3 px-4">Sotib olish
-                                        </span>
-                                </button>
+                                    <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">
+                                        <input type="hidden" name="wants" value="course"/>
+                                        <input type="hidden" name="id" value="c41d9932-6fdf-4121-b278-01d65e516eb3"/>
+                                        <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
+                                        <button class="btn btn-success my-3 rounded rounded-pill fs-3 px-4" type="submit">Sotib olish</button>
+                                    </form>
                             </div>
                             <div class="blur blur6"></div>
                         </div>

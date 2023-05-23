@@ -6,9 +6,9 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var app\models\Order $model */
 
-$this->title = $model->id;
+$this->title = 'Buyurtma № ' . $model->uuid . ' / ' . $model->user->name . ' / ' . Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i:s');
 $this->params['breadcrumbs'][] = ['label' => 'Buyurtmalar', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $model->uuid;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="order-view">
@@ -29,17 +29,37 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'uuid',
-            'user_id',
-            'wants',
+            [
+                'attribute' => 'user_id',
+                'value' => function (\app\models\Order $order) {
+                    return $order->user->name;
+                }
+            ],
+            [
+                'attribute' => 'wants',
+                'value' => function (\app\models\Order $order) {
+                    return \app\models\Order::WANTS[$order->wants] ?? null;
+                }
+            ],
             'wants_id',
-                                [
-                        'attribute' => 'status',
-                        'value' => function (Book $book) {
-                            return \app\components\Globals::getStatuses()[$book->status];
-                        }
-                    ],
-            'created_at',
-            'updated_at',
+            [
+                'attribute' => 'status',
+                'value' => function (\app\models\Order $order) {
+                    return \app\components\Globals::getOrderStatuses()[$order->status];
+                }
+            ],
+            [
+                'attribute' => 'created_at',
+                'value' => function (\app\models\Order $order) {
+                    return Yii::$app->formatter->asDatetime($order->created_at, 'php:d.m.Y H:i:s');
+                }
+            ],
+            [
+                'attribute' => 'updated_at',
+                'value' => function (\app\models\Order $order) {
+                    return Yii::$app->formatter->asDatetime($order->updated_at, 'php:d.m.Y H:i:s');
+                }
+            ],
         ],
     ]) ?>
 

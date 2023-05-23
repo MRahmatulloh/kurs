@@ -12,7 +12,7 @@ class m230226_145408_rbac_init_admin extends Migration
      */
     public function safeUp()
     {
-        $admin_role = Yii::$app->authManager->createRole('Administrator');
+        $admin_role = Yii::$app->authManager->createRole('admin');
         $admin_role->description = 'Role for system administrators';
         Yii::$app->authManager->add($admin_role);
 

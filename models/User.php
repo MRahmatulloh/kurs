@@ -66,7 +66,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['username', 'name', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'required'],
-            [['status', 'created_at', 'updated_at', 'last_login_at'], 'integer'],
+            [['status', 'created_at',             [
+                'attribute' => 'updated_at',
+                'value' => function (\app\models\Order $order) {
+                    return Yii::$app->formatter->asDatetime($order->updated_at, 'php:d.m.Y H:i:s');
+                }
+            ], 'last_login_at'], 'integer'],
             ['email', 'email'],
             ['email', 'unique'],
             ['role', 'default', 'value' => 'pupil'],
@@ -92,10 +97,10 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'password_hash' => 'Password Hash',
             'password_reset_token' => 'Password Reset Token',
             'email' => 'Email',
-            'github' => 'Github',
+            'last_login_at' => 'Oxirgi kirgan vaqti',
             'status' => 'Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => 'Yaratilgan vaqti',
+            'updated_at' => 'Yangilangan vaqt',
         ];
     }
 
@@ -199,5 +204,14 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public function can($permission)
+    {
+        return Yii::$app->user->can($permission) || Yii::$app->user->can('admin');
+    }
+
+    public function isRoleUser($roleName){
+        return Yii::$app->authManager->checkAccess($this->getId(), $roleName);
     }
 }

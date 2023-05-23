@@ -41,6 +41,10 @@ class FrontendController extends Controller
         $loginForm = new \app\models\LoginForm();
 
         if (\Yii::$app->request->isPost && $loginForm->load(Yii::$app->request->post()) && $loginForm->login()) {
+            $user = \Yii::$app->user->identity;
+            $user->last_login_at = time();
+            $user->save(false);
+
             return $this->redirect(['site/index']);
         }
         $loginForm->password = '';

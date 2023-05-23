@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Module;
 use app\models\search\ModuleSearch;
+use services\CheckAccessService;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -39,9 +40,20 @@ class ModuleController extends Controller
      */
     public function actionIndex($id = null, $lesson_id = null)
     {
+
         $searchModel = new ModuleSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $lesson = \app\models\Lesson::findOne($lesson_id);
+
+        if ((new CheckAccessService())->checkAccess('c41d9932-6fdf-4121-b278-01d65e516eb3')) {
+            return $this->render('index_locked', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'id' => $id,
+                'lesson_id' => $lesson_id,
+                'lesson' => $lesson,
+            ]);
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -89,7 +101,16 @@ class ModuleController extends Controller
         $model = new Module();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post())) {
+                $model->created_by = Yii::$app->user->id;
+                if ($model->save()) {
+                    Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно сохранены'));
+                }else{
+                    Yii::$app->session->setFlash('error', Yii::t('app', 'Unable save data. {title}: {errors}', [
+                        'title' => $model->getTitle(),
+                        'errors' => json_encode($model->getErrors()),
+                    ]));
+                }
                 return $this->redirect('index');
             }
         }
@@ -109,6 +130,7 @@ class ModuleController extends Controller
         }
 
         if ($this->request->isPost && $model->load($this->request->post())) {
+            $model->created_by = Yii::$app->user->id;
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно сохранены'));
             }else{
@@ -137,7 +159,16 @@ class ModuleController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $model->updated_by = Yii::$app->user->id;
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно сохранены'));
+            }else{
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Unable save data. {title}: {errors}', [
+                    'title' => $model->getTitle(),
+                    'errors' => json_encode($model->getErrors()),
+                ]));
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

@@ -2,8 +2,9 @@
 /* @var $content string */
 
 use yii\bootstrap4\Breadcrumbs;
+
 ?>
-<div class="content-wrapper px-3">
+<div class="content-wrapper px-3 position-relative">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -28,6 +29,10 @@ use yii\bootstrap4\Breadcrumbs;
                 <div class="col-sm-6">
                     <?php
                     echo Breadcrumbs::widget([
+                        'homeLink' => [
+                            'label' => 'Bosh sahifa',
+                            'url' => '/',
+                        ],
                         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                         'options' => [
                             'class' => 'breadcrumb float-sm-right'
@@ -41,37 +46,41 @@ use yii\bootstrap4\Breadcrumbs;
     <!-- /.content-header -->
 
     <?php if (Yii::$app->session->hasFlash('success')): ?>
-        <div class="alert alert-success alert-dismissable">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <h5><i class="icon fa fa-check"></i>
-                <?php
-                    if (is_array(Yii::$app->session->getFlash('success'))) {
-                        foreach (Yii::$app->session->getFlash('success') as $key => $value) {
-                            echo $value . '<br>';
-                        }
-                    } else {
-                        echo Yii::$app->session->getFlash('success');
-                    }
-                ?>
-            </h5>
-        </div>
+        <?php
+        $text = '';
+        if (is_array(Yii::$app->session->getFlash('success'))) {
+            foreach (Yii::$app->session->getFlash('success') as $key => $value) {
+                $text .= $value . '<br>';
+            }
+        } else {
+            $text = Yii::$app->session->getFlash('success');
+        }
+        ?>
+
+        <?= \hail812\adminlte\widgets\Alert::widget([
+            'type' => 'success',
+            'title' => 'Amal muvaffaqiyatli!',
+            'body' => "<h3>" . $text . "</h3>",
+        ]) ?>
     <?php endif; ?>
 
     <?php if (Yii::$app->session->hasFlash('error')): ?>
-        <div class="alert alert-danger alert-dismissable">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            <h5><i class="icon fa fa-exclamation"></i>
-                <?php
-                if (is_array(Yii::$app->session->getFlash('error'))) {
-                    foreach (Yii::$app->session->getFlash('error') as $key => $value) {
-                        echo $value . '<br>';
-                    }
-                } else {
-                    echo Yii::$app->session->getFlash('error');
-                }
-                ?>
-            </h5>
-        </div>
+        <?php
+        $text = '';
+        if (is_array(Yii::$app->session->getFlash('error'))) {
+            foreach (Yii::$app->session->getFlash('error') as $key => $value) {
+                $text .= $value . '<br>';
+            }
+        } else {
+            $text = Yii::$app->session->getFlash('error');
+        }
+        ?>
+
+        <?= \hail812\adminlte\widgets\Alert::widget([
+            'type' => 'danger',
+            'title' => 'Xatolik!',
+            'body' => "<h3>" . $text . "</h3>",
+        ]) ?>
     <?php endif; ?>
 
     <!-- Main content -->

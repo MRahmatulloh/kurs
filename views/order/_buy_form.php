@@ -24,7 +24,7 @@ use yii\bootstrap5\ActiveForm;
     ]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Saqlash', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Buyurtma qilish', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -87,6 +87,40 @@ class OrderController extends Controller
             'model' => $model,
         ]);
     }
+    /**
+     * Creates a new Order model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return string|\yii\web\Response
+     */
+    public function actionBuy()
+    {
+        $model = new Order();
+
+        if ($this->request->isPost) {
+            $wants = Yii::$app->request->post('wants');
+            $id = Yii::$app->request->post('id');
+
+            if ($wants && $id) {
+                $model->uuid = format_uuidv4(random_bytes(16));
+                $model->user_id = Yii::$app->user->id;
+                $model->wants = $wants;
+                $model->wants_id = $id;
+                $model->status = Order::STATUS_NEW;
+
+                if ($model->save()){
+                    Yii::$app->session->setFlash('success', Yii::t('app', 'Buyurtma qabul qilindi, tez orada siz bilan bog`lanamiz, rahmat'));
+                }else{
+                    Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi, iltimos qayta urinib ko`ring'));
+                }
+
+                return $this->redirect(['order/index']);
+            }
+        }
+
+        return $this->render('buy', [
+            'model' => $model,
+        ]);
+    }
 
     /**
      * Updates an existing Order model.

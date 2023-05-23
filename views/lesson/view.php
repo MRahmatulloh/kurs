@@ -39,8 +39,18 @@ $this->params['breadcrumbs'][] = $this->title;
                             return \app\components\Globals::getStatuses()[$book->status];
                         }
                     ],
-            'created_at',
-            'updated_at',
+            [
+                'attribute' => 'created_at',
+                'value' => function (\app\models\Order $order) {
+                    return Yii::$app->formatter->asDatetime($order->created_at, 'php:d.m.Y H:i:s');
+                }
+            ],
+                        [
+                'attribute' => 'updated_at',
+                'value' => function (\app\models\Order $order) {
+                    return Yii::$app->formatter->asDatetime($order->updated_at, 'php:d.m.Y H:i:s');
+                }
+            ],
             'created_by',
             'updated_by',
         ],

@@ -2,6 +2,7 @@
 
 namespace app\models\search;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Order;
@@ -17,8 +18,8 @@ class OrderSearch extends Order
     public function rules()
     {
         return [
-            [['id', 'user_id', 'wants_id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['uuid', 'wants'], 'safe'],
+            [['id', 'user_id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['uuid', 'wants', 'wants_id'], 'safe'],
         ];
     }
 
@@ -40,7 +41,11 @@ class OrderSearch extends Order
      */
     public function search($params)
     {
-        $query = Order::find();
+        $query = Order::find()->orderBy(['created_at' => SORT_DESC]);
+
+        if (!Yii::$app->user->can('admin')) {
+            $query->where(['user_id' => Yii::$app->user->id]);
+        }
 
         // add conditions that should always apply here
 

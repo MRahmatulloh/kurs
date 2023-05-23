@@ -22,21 +22,38 @@ $this->params['count'] = count($dataProvider->getModels());
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-//            'id',
             'name',
             'email',
             'phone',
-            'last_login',
-            //'created_at',
-            //'updated_at',
+            [
+                'attribute' => 'last_login_at',
+                'value' => function (User $model) {
+                    return Yii::$app->formatter->asDatetime($model->last_login_at, 'php:d.m.Y H:i:s');
+                },
+            ],
+//            [
+//                'attribute' => 'created_at',
+//                'value' => function (\app\models\User $order) {
+//                    return Yii::$app->formatter->asDatetime($order->created_at, 'php:d.m.Y H:i:s');
+//                }
+//            ],
+//            [
+//                'attribute' => 'updated_at',
+//                'value' => function (\app\models\User $order) {
+//                    return Yii::$app->formatter->asDatetime($order->updated_at, 'php:d.m.Y H:i:s');
+//                }
+//            ],
             //'created_by',
             //'updated_by',
             [
                 'class' => ActionColumn::className(),
+                'template' => '{update} {delete}',
                 'urlCreator' => function ($action, User $model, $key, $index, $column) {
+                    if ($model->role === 'admin') {
+                        return null;
+                    }
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

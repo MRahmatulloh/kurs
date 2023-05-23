@@ -46,34 +46,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'created_at',
-                'value' => function (\app\models\Author $author) {
-                    return $author->created_at ? date('d.m.Y H:i:s', strtotime($author->created_at)) : '';
+                'value' => function (\app\models\Author $model) {
+                    return Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i:s');
                 }
             ],
             [
                 'attribute' => 'updated_at',
-                'value' => function (\app\models\Author $author) {
-                    return $author->updated_at ? date('d.m.Y H:i:s', strtotime($author->updated_at)) : '';
+                'value' => function (\app\models\Author $model) {
+                    return Yii::$app->formatter->asDatetime($model->updated_at, 'php:d.m.Y H:i:s');;
                 }
-            ],
-            [
-                'attribute' => 'created_by',
-                'value' => function (\app\models\Author $author) {
-                    return $author->created_by;
-                }
-            ],
-            [
-                'attribute' => 'updated_by',
-                'value' => function (\app\models\Author $author) {
-                    return $author->updated_by;
-                }
-            ],
-            [
-                'attribute' => 'last_login',
-                'value' => function (\app\models\Author $author) {
-                    return $author->last_login ? date('d.m.Y H:i:s', strtotime($author->last_login)) : '';
-                }
-            ],
+            ]
         ],
     ]) ?>
 

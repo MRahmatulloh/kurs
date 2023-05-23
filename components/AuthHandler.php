@@ -72,9 +72,8 @@ class AuthHandler
                     $transaction = User::getDb()->beginTransaction();
 
                     if ($user->save()) {
-
                         $authManager = Yii::$app->authManager;
-                        $role = $authManager->getRole('Administrator');
+                        $role = $authManager->getRole('pupil');
                         Yii::$app->authManager->assign($role, $user->id);
 
                         $auth = new Auth([
@@ -83,6 +82,7 @@ class AuthHandler
                             'source_id' => (string)$id,
                         ]);
                         if ($auth->save()) {
+                            $this->updateUserInfo($user);
                             $transaction->commit();
                             Yii::$app->user->login($user, Yii::$app->params['user.rememberMeDuration'] ?? 1800);
                         } else {

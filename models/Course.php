@@ -67,7 +67,7 @@ class Course extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'uuid' => 'Uuid',
+            'uuid' => '№',
             'name' => 'Nomi',
             'description' => 'Izoh',
             'price' => 'Narxi',

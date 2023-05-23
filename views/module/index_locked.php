@@ -10,7 +10,6 @@ use yii\helpers\Html;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Darslar';
-$this->params['count_with_title'] = 'Modullar: ' . $dataProvider->getTotalCount();
 $this->params['breadcrumbs'][] = $this->title;
 
 \app\assets\AppAsset::register($this);
@@ -26,8 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
         color: white !important;
     }
 
-    .bg2 {
-        background-color: #0D3511;
+    .bg7 {
+        background-color: rgba(1, 19, 13, .3);
+    }
+    .trade {
+        font-size: 24px;
+        color: #03F291;
+        text-transform: uppercase;
     }
 
     .bg3 {
@@ -37,9 +41,30 @@ $this->params['breadcrumbs'][] = $this->title;
     .bg4 {
         background-color: #1f5022;
     }
+    .title-bar{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    .section-buy{
+        padding-bottom: 220px;
+    }
 </style>
 
 <div class="module-index">
+    <div class="col-6 m-auto mb-5 bg7 rounded rounded-3 text-white pt-5 text-center">
+        <h1>INTENSIV <span class="trade fs-1">TREYDING</span> KURSINI</h1>
+        <h3>SOTIB OLING VA QISQA VAQT ICHIDA PROFESSIONAL TREYDERGA AYLANING!</h3>
+        <div class="d-flex justify-content-center my-5">
+            <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">
+                <input type="hidden" name="wants" value="course"/>
+                <input type="hidden" name="id" value="c41d9932-6fdf-4121-b278-01d65e516eb3"/>
+                <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
+                <button class="btn btn-success my-3 rounded rounded-pill fs-3 px-4" type="submit">Sotib olish</button>
+            </form>
+        </div>
+    </div>
+
     <?php
     if ($lesson_id): ?>
         <div class="col-9 m-auto">
@@ -68,14 +93,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-body fs-6 text-white text-start">
                                     <span class="d-flex justify-content-between align-items-center">
                                         <span class="fs-4"><?= $lesson->name ?? '' ?></span>
-                                        <a href="#" class="text-white btn btn-success rounded-pill fs-5">Keyingi darsga o’tish <i
-                                                class="fa fa-angle-right"></i></a>
                                     </span>
                 </div>
             </div>
         </div>
     <?php endif; ?>
-    <div class="col-8 m-auto">
+
+    <div class="col-10 m-auto">
         <div class="container">
             <div class="row">
                 <?php
@@ -88,12 +112,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             <span class="fs-5"><?= $module->name ?></span>
                             <span class="text-right d-inline-block">
                                         <div>
+                                            <?= Html::a('<i class="fa fa-1x fa-lock text-white"></i>', ['#'], ['class' => 'btn btn-white white expand_button', 'title' => 'Ko\'rish', 'data-toggle' => "collapse", 'data-target' => "#module" . $module->id, 'aria-expanded' => "false", 'aria-controls' => "collapseExample", 'id' => "#btn" . $module->id,]) ?>
                                             <?= Html::a('<i class="fa fa-2x fa-angle-down text-white"></i>', ['#'], ['class' => 'btn btn-white white expand_button', 'title' => 'Ko\'rish', 'data-toggle' => "collapse", 'data-target' => "#module" . $module->id, 'aria-expanded' => "false", 'aria-controls' => "collapseExample", 'id' => "#btn" . $module->id,]) ?>
-                                            <?php if (Yii::$app->user->can('admin')): ?>
-                                                <?= Html::a('<i class="fa fa-eye  text-white"></i>', ['view', 'id' => $module->id], ['class' => 'btn btn-white white', 'title' => 'Ko\'rish']) ?>
-                                                <?= Html::a('<i class="fa fa-pen  text-white"></i>', ['update', 'id' => $module->id], ['class' => 'btn btn-white white', 'title' => 'Yangilash']) ?>
-                                                <?= Html::a('<i class="fa fa-trash  text-white"></i>', ['delete', 'id' => $module->id], ['class' => 'btn btn-white white', 'title' => 'O\'chirish', 'data-method' => 'post', 'data-confirm' => Yii::t('yii', 'Вы уверены, что хотите удалить этот элемент?'),]) ?>
-                                            <?php endif; ?>
                                         </div>
                             </span>
                     </span>
@@ -107,10 +127,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <span class="text-right d-inline-block">
                                                 <div>
                                                     <?= Html::a('<i class="fa fa-eye text-white"></i>', ['index', 'id' => $module->id, 'lesson_id' => $lessons->id], ['class' => 'btn btn-white white', 'title' => 'Ko\'rish']) ?>
-                                                    <?php if (Yii::$app->user->can('admin')): ?>
-                                                        <?= Html::a('<i class="fa fa-pen text-white"></i>', ['lesson/update', 'id' => $module->id], ['class' => 'btn btn-white white', 'title' => 'Yangilash']) ?>
-                                                        <?= Html::a('<i class="fa fa-trash text-white"></i>', ['lesson/delete', 'id' => $module->id], ['class' => 'btn btn-white white', 'title' => 'O\'chirish', 'data-method' => 'post', 'data-confirm' => Yii::t('yii', 'Вы уверены, что хотите удалить этот элемент?'),]) ?>
-                                                    <?php endif; ?>
                                                 </div>
                                     </span>
                                 </span>
@@ -118,55 +134,25 @@ $this->params['breadcrumbs'][] = $this->title;
                             </div>
 
                         <?php endforeach; ?>
-
-                        <?php if (Yii::$app->user->can('admin')): ?>
-                            <div class="wrappere pl-2"
-                                 style="border-left: 10px solid rgba(13, 53, 17, .9); border-radius: 10px">
-                                <div class="card card-body py-2 bg-site-primary">
-                                <span class="w-100 my-1 d-flex justify-content-end align-items-center rounded">
-                                <span class="d-inline-block">
-                                                <?= Html::button('<i class="fa fa-fw fa-plus text-white"></i>', ['class' => 'btn btn-light border-0 text-center bg-gray showModalButton', 'title' => 'Qo\'shish', 'id' => 'modalButton']) ?>
-                                </span>
-                                </span>
-                                </div>
-                            </div>
-                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
-
-                <?php if (Yii::$app->user->can('admin')): ?>
-                    <div class="card card-body p-3 mt-2 bg-site-dark">
-                                <span class="w-100 d-flex justify-content-end align-items-center rounded">
-                                <span class="d-inline-block rounded-circle">
-                                                <?= Html::a('<i class="fa fa-fw fa-plus text-gray"></i>', ['create'], ['class' => 'btn btn-light border-0 text-center bg-light', 'title' => 'Qo\'shish']) ?>
-                                </span>
-                                </span>
-                    </div>
-                <?php endif; ?>
             </div>
         </div>
     </div>
-</div>
-
-<div>
-    <?php
-    Modal::begin([
-        'title' => 'Yangi dars qo\'shish',
-        'id' => 'modal',
-//        'toggleButton' => [
-//            'label' => 'Dars qo\'shish',
-//            'tag' => 'button',
-//            'class' => 'btn btn-success',
-//        ],
-        'footer' => '',
-    ]);
-    echo $this->renderAjax('/lesson/create_ajax', [
-        'model' => new Lesson([
-            'module_id' => $id,
-        ]),
-    ]);
-    Modal::end();
-    ?>
+    <div class="col-12 text-center section-buy">
+        <div class="d-flex justify-content-center my-5">
+            <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">
+                <input type="hidden" name="wants" value="course"/>
+                <input type="hidden" name="id" value="c41d9932-6fdf-4121-b278-01d65e516eb3"/>
+                <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
+                <button class="btn btn-success my-3 rounded rounded-pill fs-3 px-4" type="submit">Kursni sotib olish</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-12 text-center py-5 bg7 title-bar">
+        <h1 class="text-white">Biz bilan birga rivojlaning</h1>
+        <h1 class="trade fs-1">Uzscool invest!</h1>
+    </div>
 </div>
 
 <?php
@@ -177,20 +163,6 @@ $(function() {
     if (id != '') {
         $('#module' + id).collapse('show');
     }
-    
-    $(document).on('click', '.showModalButton', function() {
-
-         if ($('#modal').hasClass('in')) {
-             $('#modal').find('#modalContent')
-                 .load($(this).attr('value'));
-             document.getElementById('modalHeader').innerHTML = '<h4>' + $(this).attr('title') + '</h4>';
-         } else {
-             $('#modal').modal('show')
-                 .find('#modalContent')
-                 .load($(this).attr('value'));
-             document.getElementById('modalHeader').innerHTML = '<h4>' + $(this).attr('title') + '</h4>';
-        }
-    });
     
     $(document).on('click', '.expand_button', function() {
         if (!$(this).hasClass('collapsed')) {

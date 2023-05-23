@@ -56,7 +56,7 @@ class Blog extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'uuid' => 'Uuid',
+            'uuid' => '№',
             'title' => 'Sarlavha',
             'text' => 'Matn',
             'photo' => 'Rasm',

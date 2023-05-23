@@ -27,19 +27,51 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'uuid',
-            'user_id',
-            'wants',
-            'wants_id',
             [
-                'attribute' => 'status',
-                'value' => function (Order $order) {
-                    return \app\components\Globals::getStatuses()[$order->status];
+                'attribute' => 'user_id',
+                'value' => function (\app\models\Order $order) {
+                    return $order->user->name;
                 }
             ],
-            //'created_at',
-            //'updated_at',
+            [
+                'attribute' => 'wants',
+                'value' => function (\app\models\Order $order) {
+                    return \app\models\Order::WANTS[$order->wants] ?? null;
+                }
+            ],
+            [
+                'attribute' => 'wants_id',
+                'format' => 'raw',
+                'value' => function (\app\models\Order $order) {
+
+                    if ($order->wants == 'book')
+                        return Html::a(($order->getWantedObject())->name ?? null, ['book/view-detail', 'id' => $order->wants_id]);
+
+                    elseif ($order->wants == 'course')
+                        return Html::a(($order->getWantedObject())->name ?? null, ['module/index']);
+
+                    return ($order->getWantedObject())->name ?? null;
+                }
+            ],
+            [
+                'attribute' => 'status',
+                'value' => function (\app\models\Order $order) {
+                    return \app\components\Globals::getOrderStatuses()[$order->status];
+                }
+            ],
+            [
+                'attribute' => 'created_at',
+                'value' => function (\app\models\Order $order) {
+                    return Yii::$app->formatter->asDatetime($order->created_at, 'php:d.m.Y H:i:s');
+                }
+            ],
+            [
+                'attribute' => 'updated_at',
+                'value' => function (\app\models\Order $order) {
+                    return Yii::$app->formatter->asDatetime($order->updated_at, 'php:d.m.Y H:i:s');
+                }
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Order $model, $key, $index, $column) {

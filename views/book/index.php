@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php endforeach; ?>
 
             <div class="col-4 bg-light pb-3">
-                <div class="card h-100 d-flex flex-row justify-content-center align-items-center">
+                <div class="card h-100 d-flex flex-row justify-content-center align-items-center py-5">
                     <?= Html::a('<i class="fa fa-7x fa-fw fa-plus text-white"></i>', ['create'], ['class' => 'btn btn-light border-0 text-center img-circle elevation-3 bg-gray', 'title' => 'Qo\'shish']) ?>
                 </div>
             </div>

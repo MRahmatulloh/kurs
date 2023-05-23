@@ -41,6 +41,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     return \app\components\Globals::getStatuses()[$author->status];
                 }
             ],
+            [
+                'attribute' => 'created_at',
+                'value' => function (\app\models\Author $model) {
+                    return Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i:s');
+                }
+            ],
+            [
+                'attribute' => 'updated_at',
+                'value' => function (\app\models\Author $model) {
+                    return Yii::$app->formatter->asDatetime($model->updated_at, 'php:d.m.Y H:i:s');
+                }
+            ],
             //'created_at',
             //'updated_at',
             //'created_by',

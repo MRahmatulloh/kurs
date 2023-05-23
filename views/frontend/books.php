@@ -167,26 +167,44 @@ $this->title = ' ';
                                             <p><?= $book->name ?></p>
                                             <p><?= $book->description ?></p>
                                             <span class="d-flex justify-content-between">
-                                        <span class="">199 999 so'm</span>
-                                        <a href="#" class="text-white btn btn-success">Sotib olish</a>
-                                    </span>
+                                                <?php if ($book->price): ?>
+                                                    <span class=""><?= pul2($book->price, 2) . ' so\'m' ?></span>
+                                                    <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">
+                                                      <input type="hidden" name="wants" value="book"/>
+                                                      <input type="hidden" name="id" value="<?= $book->uuid ?>"/>
+                                                      <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
+                                                      <button class="btn text-white btn btn-success fs-5" type="submit">Sotib olish</button>
+                                                    </form>
+                                                <? else: ?>
+                                                    <span style="color: #05C979">Bepul</span>
+                                                    <form method="post" action="<?= \yii\helpers\Url::to(['book/download']) ?>">
+                                                      <input type="hidden" name="id" value="<?= $book->uuid ?>"/>
+                                                      <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
+                                                      <button class="btn text-white btn btn-success fs-5" type="submit">Yuklab olish</button>
+                                                    </form>
+                                                <? endif; ?>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
 
                             <?php endforeach; ?>
                             <?= LinkPager::widget([
+                                'options' => [
+                                    'class' => 'd-flex justify-content-center mt-5',
+                                ],
                                 'pagination' => $dataProvider->pagination,
                             ]); ?>
                         <?php endif; ?>
 
                         <div class="col-12 text-center">
                             <div class="d-flex justify-content-center my-5">
-                                <button class="btn btn-success my-3 rounded rounded-pill">
-                                        <span
-                                            class="fs-3 px-4">Kursni sotib olish
-                                        </span>
-                                </button>
+                                <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">
+                                    <input type="hidden" name="wants" value="course"/>
+                                    <input type="hidden" name="id" value="c41d9932-6fdf-4121-b278-01d65e516eb3"/>
+                                    <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
+                                    <button class="btn btn-success my-3 rounded rounded-pill fs-3 px-4" type="submit">Kursni sotib olish</button>
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -64,6 +64,23 @@ class BookController extends Controller
     }
 
     /**
+     * Displays a single Book model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewDetail($id)
+    {
+        $model = Book::findOne(['uuid' => $id]);
+        if (!$model){
+            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+        }
+        return $this->render('view', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
      * Creates a new Book model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
@@ -182,6 +199,20 @@ class BookController extends Controller
             return Yii::$app->response->sendFile($model->getPhotoFilePath());
         } else{
             throw new Exception('Rasm topilmadi');
+        }
+    }
+
+    public function actionDownload()
+    {
+        if (Yii::$app->request->isPost){
+            $id = Yii::$app->request->post('id');
+            $model = Book::findOne(['uuid' => $id]);
+
+            if (file_exists($model->getFilePath()) && !is_dir($model->getFilePath())){
+                return Yii::$app->response->sendFile($model->getFilePath());
+            } else{
+                throw new Exception('Fayl topilmadi');
+            }
         }
     }
 

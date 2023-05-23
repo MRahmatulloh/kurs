@@ -37,7 +37,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             //'created_at',
-            //'updated_at',
+            //            [
+                'attribute' => 'updated_at',
+                'value' => function (\app\models\Order $order) {
+                    return Yii::$app->formatter->asDatetime($order->updated_at, 'php:d.m.Y H:i:s');
+                }
+            ],
             //'created_by',
             //'updated_by',
             [

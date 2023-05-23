@@ -79,7 +79,7 @@ class Lesson extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'uuid' => 'Uuid',
+            'uuid' => '№',
             'name' => 'Nomi',
             'filename' => 'Fayl',
             'file' => 'Fayl',
