@@ -66,12 +66,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['username', 'name', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'required'],
-            [['status', 'created_at',             [
-                'attribute' => 'updated_at',
-                'value' => function (\app\models\Order $order) {
-                    return Yii::$app->formatter->asDatetime($order->updated_at, 'php:d.m.Y H:i:s');
-                }
-            ], 'last_login_at'], 'integer'],
+            [['status', 'created_at', 'updated_at', 'last_login_at'], 'integer'],
             ['email', 'email'],
             ['email', 'unique'],
             ['role', 'default', 'value' => 'pupil'],
