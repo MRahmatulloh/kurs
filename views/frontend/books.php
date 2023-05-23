@@ -175,14 +175,14 @@ $this->title = ' ';
                                                       <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
                                                       <button class="btn text-white btn btn-success fs-5" type="submit">Sotib olish</button>
                                                     </form>
-                                                <? else: ?>
+                                                <?php else: ?>
                                                     <span style="color: #05C979">Bepul</span>
                                                     <form method="post" action="<?= \yii\helpers\Url::to(['book/download']) ?>">
                                                       <input type="hidden" name="id" value="<?= $book->uuid ?>"/>
                                                       <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
                                                       <button class="btn text-white btn btn-success fs-5" type="submit">Yuklab olish</button>
                                                     </form>
-                                                <? endif; ?>
+                                                <?php endif; ?>
                                             </span>
                                         </div>
                                     </div>
