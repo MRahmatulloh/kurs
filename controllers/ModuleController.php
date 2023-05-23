@@ -48,7 +48,7 @@ class ModuleController extends Controller
 
         $ordered = Order::findOne(['wants_id' => '6d81cd8c-b0c1-4122-95bb-ce1a30f2644d', 'user_id' => Yii::$app->user->identity->id, 'status' => Order::STATUS_APPROVED]);
 
-        if (!$ordered) {
+        if (!$ordered && !Yii::$app->user->identity->isRoleUser('admin')) {
             return $this->render('index_locked', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
