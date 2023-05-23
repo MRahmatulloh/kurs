@@ -51,27 +51,25 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 <div class="book-index container">
-    <div class="col-12 m-auto">
-
+    <div class="col-10 m-auto">
         <div class="container">
             <div class="row">
-                <div class="col-10 m-auto">
-                    <?php
-                    /**
-                     * @var Book $book
-                     */
-                    foreach ($dataProvider->getModels() as $book): ?>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-img d-flex justify-content-center">
-                                    <img class="card-img-top"
-                                         src="<?= Yii::getAlias('@web') . '/img/books/' . ($book->photo ?? 'no-photo.png') ?>"
-                                         alt="">
-                                </div>
-                                <div class="card-body bg3 fs-6 text-white text-start">
-                                    <h5><?= $book->name ?></h5>
-                                    <p><?= $book->description ?></p>
-                                    <span class="d-flex justify-content-between align-items-center">
+                <?php
+                /**
+                 * @var Book $book
+                 */
+                foreach ($dataProvider->getModels() as $book): ?>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-img d-flex justify-content-center">
+                                <img class="card-img-top"
+                                     src="<?= Yii::getAlias('@web') . '/img/books/' . ($book->photo ?? 'no-photo.png') ?>"
+                                     alt="">
+                            </div>
+                            <div class="card-body bg3 fs-6 text-white text-start">
+                                <h5><?= $book->name ?></h5>
+                                <p><?= $book->description ?></p>
+                                <span class="d-flex justify-content-between align-items-center">
                                     <?php if (Yii::$app->user->identity->isRoleUser('admin')): ?>
                                         <?php if ($book->price): ?>
                                             <span class="fs-6"><?= pul2($book->price, 2) ?> so'm</span>
@@ -107,38 +105,35 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?php endif; ?>
                                     <?php endif ?>
                                 </span>
-                                </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
-
-                    <?php if (Yii::$app->user->can('admin')): ?>
-                        <div class="col-4 bg-light pb-3">
-                            <div class="card h-100 d-flex flex-row justify-content-center align-items-center py-5">
-                                <?= Html::a('<i class="fa fa-7x fa-fw fa-plus text-white"></i>', ['create'], ['class' => 'btn btn-light border-0 text-center img-circle elevation-3 bg-gray', 'title' => 'Qo\'shish']) ?>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-
-                </div>
-
-                <?php if (Yii::$app->user->can('admin')): ?>
-                    <div class="col-12 text-center section-buy">
-                        <div class="d-flex justify-content-center my-5">
-                            <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">
-                                <input type="hidden" name="wants" value="course"/>
-                                <input type="hidden" name="id" value="6d81cd8c-b0c1-4122-95bb-ce1a30f2644d"/>
-                                <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
-                                <button class="btn btn-success my-3 rounded rounded-pill fs-3 px-4" type="submit">Kursni sotib olish</button>
-                            </form>
                         </div>
                     </div>
-                    <div class="col-12 text-center py-5 bg7 title-bar">
-                        <h1 class="text-white">Biz bilan birga rivojlaning</h1>
-                        <h1 class="trade fs-1">Uzscool invest!</h1>
+                <?php endforeach; ?>
+
+                <?php if (Yii::$app->user->can('admin')): ?>
+                    <div class="col-4 bg-light pb-3">
+                        <div class="card h-100 d-flex flex-row justify-content-center align-items-center py-5">
+                            <?= Html::a('<i class="fa fa-7x fa-fw fa-plus text-white"></i>', ['create'], ['class' => 'btn btn-light border-0 text-center img-circle elevation-3 bg-gray', 'title' => 'Qo\'shish']) ?>
+                        </div>
                     </div>
                 <?php endif; ?>
             </div>
         </div>
     </div>
+    <?php if (Yii::$app->user->can('pupil')): ?>
+        <div class="col-12 text-center section-buy">
+            <div class="d-flex justify-content-center my-5">
+                <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">
+                    <input type="hidden" name="wants" value="course"/>
+                    <input type="hidden" name="id" value="6d81cd8c-b0c1-4122-95bb-ce1a30f2644d"/>
+                    <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
+                    <button class="btn btn-success my-3 rounded rounded-pill fs-3 px-4" type="submit">Kursni sotib olish</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-12 text-center py-5 bg7 title-bar">
+            <h1 class="text-white">Biz bilan birga rivojlaning</h1>
+            <h1 class="trade fs-1">Uzscool invest!</h1>
+        </div>
+    <?php endif; ?>
 </div>
