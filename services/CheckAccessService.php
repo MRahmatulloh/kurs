@@ -12,6 +12,7 @@ class CheckAccessService
     public function __construct()
     {
         $this->user = Yii::$app->user->identity;
+
     }
 
     public function checkAccess($resourse_id)
