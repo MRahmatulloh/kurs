@@ -7,17 +7,9 @@ use Yii;
 
 class CheckAccessService
 {
-    public $user;
-
-    public function __construct()
+    public static function checkAccess($resourse_id, $user_id)
     {
-        $this->user = Yii::$app->user->identity;
-
-    }
-
-    public function checkAccess($resourse_id)
-    {
-        $order = \app\models\Order::findOne(['wants_id' => $resourse_id, 'user_id' => $this->user->id, 'status' => Order::STATUS_APPROVED]);
+        $order = \app\models\Order::findOne(['wants_id' => $resourse_id, 'user_id' => $user_id, 'status' => Order::STATUS_APPROVED]);
 
         if ($order) {
             return true;
