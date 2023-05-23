@@ -45,7 +45,7 @@ class ModuleController extends Controller
         $dataProvider = $searchModel->search($this->request->queryParams);
         $lesson = \app\models\Lesson::findOne($lesson_id);
 
-        if ((new CheckAccessService())->checkAccess('c41d9932-6fdf-4121-b278-01d65e516eb3')) {
+        if ((new CheckAccessService())->checkAccess('6d81cd8c-b0c1-4122-95bb-ce1a30f2644d')) {
             return $this->render('index_locked', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,

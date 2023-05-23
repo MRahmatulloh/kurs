@@ -1063,7 +1063,7 @@ $this->title = ' ';
                             <div class="d-flex justify-content-center my-5">
                                     <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">
                                         <input type="hidden" name="wants" value="course"/>
-                                        <input type="hidden" name="id" value="c41d9932-6fdf-4121-b278-01d65e516eb3"/>
+                                        <input type="hidden" name="id" value="6d81cd8c-b0c1-4122-95bb-ce1a30f2644d"/>
                                         <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
                                         <button class="btn btn-success my-3 rounded rounded-pill fs-3 px-4" type="submit">Sotib olish</button>
                                     </form>
