@@ -82,6 +82,7 @@ class AuthHandler
                             'source_id' => (string)$id,
                         ]);
                         if ($auth->save()) {
+                            $this->updateUserInfo($user);
                             $transaction->commit();
                             Yii::$app->user->login($user, Yii::$app->params['user.rememberMeDuration'] ?? 1800);
                         } else {
