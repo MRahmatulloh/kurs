@@ -73,9 +73,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        if (Yii::$app->user->identity->isRoleUser('pupil')) {
-            return $this->redirect(['/module/index']);
-        }
+
         $booksCount = \app\models\Book::find()->count();
         $lessonsCount = \app\models\Lesson::find()->count();
         $pupilsCount = count(Yii::$app->authManager->getUserIdsByRole("pupil"));
