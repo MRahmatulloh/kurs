@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Order;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -72,7 +73,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $booksCount = \app\models\Book::find()->count();
+        $lessonsCount = \app\models\Lesson::find()->count();
+        $pupilsCount = count(Yii::$app->authManager->getUserIdsByRole("pupil"));
+        $ordersCount = \app\models\Order::find()->where(['status' => Order::STATUS_NEW])->count();
+
+        return $this->render('index', [
+            'booksCount' => $booksCount,
+            'lessonsCount' => $lessonsCount,
+            'pupilsCount' => $pupilsCount,
+            'ordersCount' => $ordersCount,
+        ]);
     }
 
     /**

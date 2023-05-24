@@ -45,14 +45,8 @@
                         'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->can('admin')
                     ],
                     [
-                        'label' => 'O\'qituvchilar',
-                        'icon' => 'user-graduate',
-                        'url' => ['/user/teachers'],
-                        'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->can('admin')
-                    ],
-                    [
                         'label' => 'O\'quvchilar',
-                        'icon' => 'users',
+                        'icon' => 'user-graduate',
                         'url' => ['/user/pupils'],
                         'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->can('admin')
                     ],

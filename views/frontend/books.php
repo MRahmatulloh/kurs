@@ -24,6 +24,7 @@ $this->title = ' ';
     <title>UZSCOOL</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
+    <link rel="icon" type="image/x-icon" href="/img/logo.svg">
     <link href="<?= Yii::getAlias('@web') ?>/front/assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= Yii::getAlias('@web') ?>/front/assets/dist/css/cover.css" rel="stylesheet">
 </head>
