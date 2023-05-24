@@ -15,12 +15,16 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'wants')->dropDownList($model::WANTS, [
         'class' => 'form-control',
+        'disabled' => Yii::$app->user->identity->isRoleUser('pupil')
     ]) ?>
 
-    <?= $form->field($model, 'wants_id')->textInput() ?>
+    <?= $form->field($model, 'wants_id')->textInput([
+        'disabled' => Yii::$app->user->identity->isRoleUser('pupil')
+    ]) ?>
 
     <?= $form->field($model, 'status')->dropDownList(Globals::getOrderStatuses(), [
         'class' => 'form-control',
+        'disabled' => Yii::$app->user->identity->isRoleUser('pupil')
     ]) ?>
 
     <div class="form-group">
