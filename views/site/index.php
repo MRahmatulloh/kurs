@@ -10,7 +10,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
                 'title' => $ordersCount,
                 'text' => 'Yangi buyurtmalar',
                 'icon' => 'fas fa-shopping-cart',
-                'linkUrl' => ['user/pupils'],
+                'linkUrl' => ['order/index'],
                 'linkText' => 'Batafsil',
             ]) ?>
         </div>
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
                 'title' => $pupilsCount,
                 'text' => 'O\'quvchilar',
                 'icon' => 'fas fa-user-graduate',
-                'linkUrl' => ['order/index'],
+                'linkUrl' => ['user/pupils'],
                 'linkText' => 'Batafsil',
                 'theme' => 'success',
             ]) ?>
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
                 'icon' => 'fa fa-clipboard-list',
                 'linkUrl' => ['module/index'],
                 'linkText' => 'Batafsil',
-                'theme' => 'success',
+                'theme' => 'gray',
             ]) ?>
         </div>
     </div>
