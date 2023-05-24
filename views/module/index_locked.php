@@ -128,7 +128,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <span class="w-100 d-flex justify-content-between align-items-center rounded">
                                     <span class="fs-6"><?= $lessons->name ?></span>
                                     <span class="text-right d-inline-block">
-                                                <?php if ($lesson->id <= 1 || ($ordered ?? false)): ?>
+                                                <?php if ($lessons->id <= 1 || ($ordered ?? false)): ?>
                                                     <div>
                                                         <?= Html::a('<i class="fa fa-eye text-white"></i>', ['index', 'id' => $module->id, 'lesson_id' => $lessons->id], ['class' => 'btn btn-white white', 'title' => 'Ko\'rish']) ?>
                                                     </div>
