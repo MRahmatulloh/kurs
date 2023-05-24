@@ -73,11 +73,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
         $booksCount = \app\models\Book::find()->count();
         $lessonsCount = \app\models\Lesson::find()->count();
         $pupilsCount = count(Yii::$app->authManager->getUserIdsByRole("pupil"));
         $ordersCount = \app\models\Order::find()->where(['status' => Order::STATUS_NEW])->count();
+
+        if (Yii::$app->user->identity->isRoleUser('pupil')){
+            $ordersCount = \app\models\Order::find()->where(['status' => Order::STATUS_NEW, 'user_id' => Yii::$app->user->identity->id])->count();
+        }
 
         return $this->render('index', [
             'booksCount' => $booksCount,

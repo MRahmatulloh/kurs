@@ -44,7 +44,7 @@ class OrderSearch extends Order
         $query = Order::find()->orderBy(['created_at' => SORT_DESC]);
 
         if (!Yii::$app->user->can('admin')) {
-            $query->where(['user_id' => Yii::$app->user->id]);
+            $query->where(['user_id' => Yii::$app->user->identity->id]);
         }
 
         // add conditions that should always apply here

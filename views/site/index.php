@@ -14,16 +14,18 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
                 'linkText' => 'Batafsil',
             ]) ?>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => $pupilsCount,
-                'text' => 'O\'quvchilar',
-                'icon' => 'fas fa-user-graduate',
-                'linkUrl' => ['user/pupils'],
-                'linkText' => 'Batafsil',
-                'theme' => 'success',
-            ]) ?>
-        </div>
+        <?php if (!Yii::$app->user->identity->isRoleUser('pupil')): ?>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                    'title' => $pupilsCount,
+                    'text' => 'O\'quvchilar',
+                    'icon' => 'fas fa-user-graduate',
+                    'linkUrl' => ['user/pupils'],
+                    'linkText' => 'Batafsil',
+                    'theme' => 'success',
+                ]) ?>
+            </div>
+        <?php endif; ?>
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <?= \hail812\adminlte\widgets\SmallBox::widget([
                 'title' => $booksCount,
