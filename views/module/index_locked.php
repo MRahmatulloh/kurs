@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
     .bg7 {
         background-color: rgba(1, 19, 13, .3);
     }
+
     .trade {
         font-size: 24px;
         color: #03F291;
@@ -41,12 +42,14 @@ $this->params['breadcrumbs'][] = $this->title;
     .bg4 {
         background-color: #1f5022;
     }
-    .title-bar{
+
+    .title-bar {
         position: absolute;
         bottom: 0;
         left: 0;
     }
-    .section-buy{
+
+    .section-buy {
         padding-bottom: 220px;
     }
 </style>
@@ -125,9 +128,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <span class="w-100 d-flex justify-content-between align-items-center rounded">
                                     <span class="fs-6"><?= $lessons->name ?></span>
                                     <span class="text-right d-inline-block">
-                                                <div>
-                                                    <?= Html::a('<i class="fa fa-eye text-white"></i>', ['index', 'id' => $module->id, 'lesson_id' => $lessons->id], ['class' => 'btn btn-white white', 'title' => 'Ko\'rish']) ?>
-                                                </div>
+                                                <?php if ($lesson->id <= 1 || ($ordered ?? false)): ?>
+                                                    <div>
+                                                        <?= Html::a('<i class="fa fa-eye text-white"></i>', ['index', 'id' => $module->id, 'lesson_id' => $lessons->id], ['class' => 'btn btn-white white', 'title' => 'Ko\'rish']) ?>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <div>
+                                                        <?= Html::a('<i class="fa fa-lock text-white"></i>', ['#'], ['class' => 'btn btn-white white', 'title' => 'Qulflangan']) ?>
+                                                    </div>
+                                                <?php endif; ?>
                                     </span>
                                 </span>
                                 </div>
@@ -145,7 +154,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <input type="hidden" name="wants" value="course"/>
                 <input type="hidden" name="id" value="6d81cd8c-b0c1-4122-95bb-ce1a30f2644d"/>
                 <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
-                <button class="btn btn-success my-3 rounded rounded-pill fs-3 px-4" type="submit">Kursni sotib olish</button>
+                <button class="btn btn-success my-3 rounded rounded-pill fs-3 px-4" type="submit">Kursni sotib olish
+                </button>
             </form>
         </div>
     </div>

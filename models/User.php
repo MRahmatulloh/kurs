@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\components\SelectListTrait;
+use mdm\admin\models\form\ChangePassword;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -28,6 +29,9 @@ use yii\web\IdentityInterface;
  * @property int $last_login_at
  *
  * @property Auth[] $auths
+ * @property Book[] $books
+ * @property Course[] $courses
+ * @property Order[] $orders
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -82,7 +86,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => 'Foydalanuvchi',
             'name' => 'Ism, familiyasi',
             'photo' => 'Rasm',
             'phone' => 'Telefon',
@@ -209,4 +213,10 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function isRoleUser($roleName){
         return Yii::$app->authManager->checkAccess($this->getId(), $roleName);
     }
+
+    public function getOrders()
+    {
+        return $this->hasMany(Order::class, ['user_id' => 'id']);
+    }
+
 }

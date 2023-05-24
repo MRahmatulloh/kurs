@@ -71,17 +71,14 @@ use yii\helpers\Html;
                 <span class="text-white"><?= Yii::$app->user->identity->name ?? '' ?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <a href="#" class="dropdown-item">
-                    Settings
+                <a href="/user/profile" class="dropdown-item">
+                    Mening profilim
                 </a>
-                <a href="#" class="dropdown-item">
-                    Profile
+                <a href="/order/index" class="dropdown-item">
+                    Mening buyurtmalarim
                 </a>
-                <a href="#" class="dropdown-item">
-                    Change password
-                </a>
-                <a href="#" class="dropdown-item">
-                    Exit
+                <a href="/user/change-password" class="dropdown-item">
+                    Parolni yangilash
                 </a>
             </div>
         </li>

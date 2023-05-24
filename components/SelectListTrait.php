@@ -6,8 +6,8 @@ use yii\helpers\ArrayHelper;
 
 trait SelectListTrait
 {
-    public static function selectList()
+    public static function selectList($condition = null)
     {
-        return ArrayHelper::map(self::find()->asArray()->all(), 'id', 'name');
+        return ArrayHelper::map(self::find()->where($condition)->asArray()->all(), 'id', 'name');
     }
 }

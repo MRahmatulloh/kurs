@@ -31,6 +31,15 @@ class ChangePassword extends Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'oldPassword' => 'Eski parol',
+            'newPassword' => 'Yangi parol',
+            'retypePassword' => 'Yangi parolni takrorlang',
+        ];
+    }
+
     /**
      * Validates the password.
      * This method serves as the inline validation for password.
@@ -56,7 +65,7 @@ class ChangePassword extends Model
             $user = Yii::$app->user->identity;
             $user->setPassword($this->newPassword);
             $user->generateAuthKey();
-            if ($user->save()) {
+            if ($user->save(false)) {
                 return true;
             }
         }
