@@ -135,7 +135,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-    <?php if (Yii::$app->user->can('pupil')): ?>
+    <?php if (Yii::$app->user->can('pupil') and !Yii::$app->user->identity->isPurchasedCourse()): ?>
         <div class="col-12 text-center section-buy">
             <div class="d-flex justify-content-center my-5">
                 <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">

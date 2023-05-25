@@ -13,8 +13,11 @@ class User extends Model
 {
     public $id;
     public $username;
+    public $name;
+    public $phone;
     public $email;
     public $status;
+    public $role;
     
     /**
      * @inheritdoc
@@ -22,8 +25,8 @@ class User extends Model
     public function rules()
     {
         return [
-            [['id', 'status',], 'integer'],
-            [['username', 'email'], 'safe'],
+            [['id', 'status'], 'integer'],
+            [['username', 'role', 'email', 'name', 'phone', 'ids'], 'safe'],
         ];
     }
 
@@ -44,6 +47,11 @@ class User extends Model
             'query' => $query,
         ]);
 
+        if ($this->role){
+            $ids = Yii::$app->authManager->getUserIdsByRole($this->role);
+            $query->andWhere(['id' => $ids]);
+        }
+
         $this->load($params);
         if (!$this->validate()) {
             $query->where('1=0');
@@ -56,7 +64,8 @@ class User extends Model
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'email', $this->email]);
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

@@ -10,18 +10,17 @@ use Yii;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
+use yii\web\UploadedFile;
 
 class UserController extends Controller
 {
 
     public function actionAdmins()
     {
-        $ids = Yii::$app->authManager->getUserIdsByRole("admin");
-        $searchModel = new UserSearch();
-        $query = User::find()->where(['id' => $ids]);
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+        $searchModel = new UserSearch([
+            'role' => 'admin'
         ]);
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -32,12 +31,10 @@ class UserController extends Controller
 
     public function actionTeachers()
     {
-        $ids = Yii::$app->authManager->getUserIdsByRole("teacher");
-        $searchModel = new UserSearch();
-        $query = User::find()->where(['id' => $ids]);
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+        $searchModel = new UserSearch([
+            'role' => 'teacher'
         ]);
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -48,12 +45,10 @@ class UserController extends Controller
 
     public function actionPupils()
     {
-        $ids = Yii::$app->authManager->getUserIdsByRole("pupil");
-        $searchModel = new UserSearch();
-        $query = User::find()->where(['id' => $ids]);
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+        $searchModel = new UserSearch([
+            'role' => 'pupil'
         ]);
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -123,7 +118,7 @@ class UserController extends Controller
             if ($model->change()) {
                 Yii::$app->session->setFlash('success', 'Parol muvaffaqiyatli o\'zgartirildi');
                 return $this->redirect(['site/index']);
-            }else{
+            } else {
                 Yii::$app->session->setFlash('error', 'Parol o\'zgartirishda xatolik');
             }
         }
@@ -133,10 +128,39 @@ class UserController extends Controller
         ]);
     }
 
-    public function actionProfile(){
+    public function actionProfile()
+    {
         $model = User::findOne(Yii::$app->user->id);
 
         return $this->render('profile', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionUpdate($id)
+    {
+        $model = User::findOne($id);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->password_reset_token = Yii::$app->security->generateRandomString();
+
+            $model->image = UploadedFile::getInstance($model, 'image');
+            if ($model->image) {
+                if (file_exists($model->getPhotoFilePath()) && !is_dir($model->getPhotoFilePath())) {
+                    unlink($model->getPhotoFilePath());
+                }
+                $model->photo = $model->id . '.' . $model->image->extension;
+                $model->image->saveAs($model->getPhotoFilePath(), false);
+            }
+
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
+                return $this->redirect(['profile', 'id' => $model->id]);
+            } else {
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!'));
+            }
+        }
+
+        return $this->render('update', [
             'model' => $model,
         ]);
     }

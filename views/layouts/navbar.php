@@ -60,7 +60,7 @@ if (Yii::$app->user->identity->isRoleUser('admin')) {
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                <img src="<?=$assetDir?>/img/user1-128x128.jpg" alt="User Avatar" class="img-size-30 img-circle mr-2">
+                <img src="<?= Yii::getAlias('@web') . '/img/users/' . (Yii::$app->user->identity->photo ?? 'no-photo.jpg'); ?>" alt="User Avatar" class="img-size-30 img-circle mr-2">
                 <span class="text-white"><?= Yii::$app->user->identity->name ?? '' ?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">

@@ -104,8 +104,15 @@ class OrderController extends Controller
             $id = Yii::$app->request->post('id');
 
             if ($wants && $id) {
+                $user = Yii::$app->user->identity;
+
+                if (!$user->phone){
+                    Yii::$app->session->setFlash('error', Yii::t('app', 'Telefon raqami kiritilmagan. Iltimos avval profilingizga telefon raqamingizni kiriting'));
+                    return $this->redirect(['user/update', 'id' => $user->id]);
+                }
+
                 $model->uuid = format_uuidv4(random_bytes(16));
-                $model->user_id = Yii::$app->user->id;
+                $model->user_id = $user->id;
                 $model->wants = $wants;
                 $model->wants_id = $id;
                 $model->status = Order::STATUS_NEW;

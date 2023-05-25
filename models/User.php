@@ -37,6 +37,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
     use SelectListTrait;
 
+    public $image;
+
     public const ROLES = [
         'pupil' => 'O\'quvchi',
         'teacher' => 'O\'qituvchi',
@@ -77,6 +79,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             ['role', 'in', 'range' => ['pupil', 'teacher', 'admin']],
             ['status', 'in', 'range' => [User::STATUS_ACTIVE, User::STATUS_ACTIVE]],
             [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'photo', 'phone', 'role'], 'string', 'max' => 255],
+            [['image'], 'file', 'extensions' => 'jpg, jpeg, png, bmp', 'maxFiles' => 1, 'maxSize' => 4 * 1024 * 1024],
         ];
     }
 
@@ -210,7 +213,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return Yii::$app->user->can($permission) || Yii::$app->user->can('admin');
     }
 
-    public function isRoleUser($roleName){
+    public function isRoleUser($roleName)
+    {
         return Yii::$app->authManager->checkAccess($this->getId(), $roleName);
     }
 
@@ -219,8 +223,19 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->hasMany(Order::class, ['user_id' => 'id']);
     }
 
-    public function isPurchasedCourse(){
-        return Order::find(['wants_id' => '3ffb626c-07b2-4928-a5eb-4ee1e78c1f2c', 'user_id' => Yii::$app->user->identity->id, 'status' => Order::STATUS_APPROVED])->exists();
+    public function isPurchasedCourse()
+    {
+
+        if (Yii::$app->user->identity->isRoleUser('admin')) {
+            return true;
+        }
+
+        return Order::find()->where(['wants_id' => '3ffb626c-07b2-4928-a5eb-4ee1e78c1f2c', 'user_id' => Yii::$app->user->identity->id, 'status' => Order::STATUS_APPROVED])->exists();
+    }
+
+    public function getPhotoFilePath()
+    {
+        return Yii::getAlias('@app') . '/web/img/users/' . $this->photo;
     }
 
 }
