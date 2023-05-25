@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="book-view">
 
-    <?php if (Yii::$app->user->can('admin')):?>
+    <?php if (Yii::$app->user->identity->isRoleUser('admin')):?>
     <p class="text-right">
         <?= Html::a('Yangilash', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('O\'chirish', ['delete', 'id' => $model->id], [

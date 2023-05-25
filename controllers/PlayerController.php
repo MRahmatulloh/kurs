@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\components\VideoStream;
+use app\models\Order;
 use Yii;
 use yii\web\Controller;
 
@@ -10,43 +11,16 @@ class PlayerController extends Controller
 {
     public function actionPlay($id = null)
     {
-        $lesson = \app\models\Lesson::findOne($id);
-//        Yii::$app->response->format = Yii::$app->response::FORMAT_RAW;
-//        Yii::$app->response->headers->set('Content-Type: video/mp4');
-//        Yii::$app->response->stream = Yii::$app->fs->readStream('');
+        $user = Yii::$app->user->identity;
+        $ordered = Order::findOne(['wants_id' => '6d81cd8c-b0c1-4122-95bb-ce1a30f2644d', 'user_id' => Yii::$app->user->identity->id, 'status' => Order::STATUS_APPROVED]);
+
+        if ($user->isRoleUser('pupil') && !$ordered) {
+            return null;
+        }
+
+        $lesson = \app\models\Lesson::findOne(['uuid' => $id]);
         $videoPath = Yii::getAlias('@app') . '/files/lessons/' . $lesson->filename;
-//
-//// Set the appropriate headers
-//        header('Content-Type: video/mp4');
-//        header('Content-Length: ' . filesize($videoPath));
-//
-//// Open the video file
-//        $file = fopen($videoPath, 'rb');
-//
-//// Start streaming the video
-//        while (!feof($file)) {
-//            // Set the chunk size (adjust as needed)
-//            $chunkSize = 1024 * 1024; // 1MB
-//
-//            // Output the video in chunks
-//            echo fread($file, $chunkSize);
-//
-//            // Flush the output buffer
-//            ob_flush();
-//            flush();
-//
-//            // Delay between chunks (adjust as needed)
-//            usleep(500000); // 0.5 seconds
-//        }
-//
-//// Close the file
-//        fclose($file);
         $stream = new VideoStream($videoPath);
         $stream->start();
-    }
-
-    public function actionIndex($id = null)
-    {
-        return $this->render('index');
     }
 }

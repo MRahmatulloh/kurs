@@ -121,16 +121,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             </span>
                     </span>
                     <div class="collapse" id="<?= "module" . $module->id ?>">
-                        <?php foreach ($module->lessons as $lessons): ?>
+                        <?php foreach ($module->lessons as $lesson): ?>
+                        <?php if ($lesson->status == Lesson::STATUS_INACTIVE) continue; ?>
                             <div class="wrappere pl-2"
                                  style="border-left: 10px solid rgba(13, 53, 17, .9); border-radius: 10px">
                                 <div class="card card-body py-2 bg-site-primary ">
                                 <span class="w-100 d-flex justify-content-between align-items-center rounded">
-                                    <span class="fs-6"><?= $lessons->name ?></span>
+                                    <span class="fs-6"><?= $lesson->name ?></span>
                                     <span class="text-right d-inline-block">
-                                                <?php if ($lessons->id <= 1 || ($ordered ?? false)): ?>
+                                                <?php if ($lesson->status == Lesson::STATUS_DEMO): ?>
                                                     <div>
-                                                        <?= Html::a('<i class="fa fa-eye text-white"></i>', ['index', 'id' => $module->id, 'lesson_id' => $lessons->id], ['class' => 'btn btn-white white', 'title' => 'Ko\'rish']) ?>
+                                                        <?= Html::a('<i class="fa fa-eye text-white"></i>', ['index', 'id' => $module->id, 'lesson_id' => $lesson->uuid], ['class' => 'btn btn-white white', 'title' => 'Ko\'rish']) ?>
                                                     </div>
                                                 <?php else: ?>
                                                     <div>

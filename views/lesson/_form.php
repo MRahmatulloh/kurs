@@ -1,6 +1,7 @@
 <?php
 
 use app\components\Globals;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
@@ -13,17 +14,22 @@ use yii\bootstrap5\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'uuid')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'filename')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 2]) ?>
 
-    <?= $form->field($model, 'module_id')->textInput() ?>
+    <?= $form->field($model, 'module_id')->widget(Select2::classname(), [
+        'data' => \app\models\Module::selectList(),
+        'language' => 'en',
+        'options' => ['placeholder' => 'Modulni tanlang ...'],
+        'pluginOptions' => [
+            'allowClear' => true,
+        ],
+    ]); ?>
 
-    <?= $form->field($model, 'status')->dropDownList(Globals::getStatuses(), [
+    <?= $form->field($model, 'status')->dropDownList(\app\models\Lesson::STATUSES, [
         'class' => 'form-control',
     ]) ?>
 

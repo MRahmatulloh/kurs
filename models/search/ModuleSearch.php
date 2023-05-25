@@ -40,7 +40,7 @@ class ModuleSearch extends Module
      */
     public function search($params)
     {
-        $query = Module::find();
+        $query = Module::find()->orderBy(['name' => SORT_ASC]);
 
         // add conditions that should always apply here
 

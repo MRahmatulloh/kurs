@@ -17,8 +17,8 @@ class LessonSearch extends Lesson
     public function rules()
     {
         return [
-            [['id', 'module_id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['uuid', 'name', 'filename', 'description'], 'safe'],
+            [['id', 'module_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['uuid', 'name', 'filename', 'status', 'description'], 'safe'],
         ];
     }
 

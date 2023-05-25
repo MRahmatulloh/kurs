@@ -33,14 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'filename',
             'description:ntext',
             //'module_id',
-                                [
-                        'attribute' => 'status',
-                        'value' => function (Book $book) {
-                            return \app\components\Globals::getStatuses()[$book->status];
-                        }
-                    ],
+            [
+                'attribute' => 'status',
+                'value' => function (Lesson $book) {
+                    return Lesson::STATUSES[$book->status] ?? '';
+                }
+            ],
             //'created_at',
-            //            [
+            [
                 'attribute' => 'updated_at',
                 'value' => function (\app\models\Order $order) {
                     return Yii::$app->formatter->asDatetime($order->updated_at, 'php:d.m.Y H:i:s');
@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Lesson $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

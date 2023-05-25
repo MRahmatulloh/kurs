@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         </div>
 
                                     <?php else: ?>
-                                        <?php if ($book->price): ?>
+                                        <?php if ($book->price && !$book->isPurchased()): ?>
                                             <span class=""><?= pul2($book->price, 2) . ' so\'m' ?></span>
                                             <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">
                                                       <input type="hidden" name="wants" value="book"/>

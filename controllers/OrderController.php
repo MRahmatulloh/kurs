@@ -68,7 +68,10 @@ class OrderController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Order();
+        $model = new Order([
+            'user_id' => Yii::$app->user->id,
+            'status' => Order::STATUS_NEW,
+        ]);
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {

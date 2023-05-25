@@ -21,6 +21,8 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property Course $course
  * @property Lesson[] $lessons
+ * @property User $createdBy
+ * @property User $updatedBy
  */
 class Module extends \yii\db\ActiveRecord
 {
@@ -101,6 +103,16 @@ class Module extends \yii\db\ActiveRecord
      */
     public function getLessons()
     {
-        return $this->hasMany(Lesson::class, ['module_id' => 'id']);
+        return $this->hasMany(Lesson::class, ['module_id' => 'id'])->orderBy(['name' => SORT_ASC]);
+    }
+
+    public function getCreatedBy()
+    {
+        return $this->hasOne(User::class, ['id' => 'created_by']);
+    }
+
+    public function getUpdatedBy()
+    {
+        return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 }

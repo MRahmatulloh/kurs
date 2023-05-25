@@ -39,12 +39,12 @@ class ModuleController extends Controller
      *
      * @return string
      */
-    public function actionIndex($id = null, $lesson_id = null)
+    public function actionIndex($id = null, $lesson_id = null, $next = null)
     {
 
         $searchModel = new ModuleSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        $lesson = \app\models\Lesson::findOne($lesson_id);
+        $lesson = \app\models\Lesson::findOne(['uuid' => $lesson_id]);
 
         $ordered = Order::findOne(['wants_id' => '6d81cd8c-b0c1-4122-95bb-ce1a30f2644d', 'user_id' => Yii::$app->user->identity->id, 'status' => Order::STATUS_APPROVED]);
 
@@ -57,6 +57,35 @@ class ModuleController extends Controller
                 'lesson' => $lesson,
                 'ordered' => $ordered,
             ]);
+        }
+
+        if ($next && $lesson) {
+            $module = $lesson->module;
+            $lessonList = $module->lessons;
+            $nextLesson = null;
+            $nextModule = null;
+            foreach ($lessonList as $key => $value) {
+                if ($value->uuid == $lesson->uuid) {
+                    $nextLesson = $lessonList[$key + 1] ?? null;
+                }
+            }
+
+            if ($nextLesson) {
+                return $this->redirect(['index', 'id' => $id, 'lesson_id' => $nextLesson->uuid]);
+            }
+            else{
+                $moduleList = Module::find()->orderBy('name ASC')->all();
+                foreach ($moduleList as $key => $value) {
+                    if ($value->id == $module->id) {
+                        $nextModule = $moduleList[$key + 1] ?? null;
+                    }
+                }
+
+                if ($nextModule){
+                    $nextLesson = $nextModule->lessons[0] ?? $lesson->uuid;
+                    return $this->redirect(['index', 'id' => ($nextModule->id ?? $id), 'lesson_id' => $nextLesson->uuid]);
+                }
+            }
         }
 
         return $this->render('index', [

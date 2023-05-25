@@ -103,4 +103,16 @@ class Book extends \yii\db\ActiveRecord
     {
         return $this->filePath . $this->filename;
     }
+
+    public function isPurchased()
+    {
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
+        if (Yii::$app->user->identity->isRoleUser('admin')) {
+            return true;
+        }
+
+        return Order::find()->where(['wants_id' => $this->uuid, 'user_id' => Yii::$app->user->identity->id, 'status' => Order::STATUS_APPROVED])->exists();
+    }
 }

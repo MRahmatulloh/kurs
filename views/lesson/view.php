@@ -13,9 +13,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lesson-view">
 
-    <p>
-        <?= Html::a('Yangilash', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('O\'chirish', ['delete', 'id' => $model->id], [
+    <p class="text-right">
+        <?= Html::a('Yangilash', ['update', 'id' => $model->uuid], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('O\'chirish', ['delete', 'id' => $model->uuid], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -27,32 +27,52 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'uuid',
             'name',
-            'filename',
+            [
+                'attribute' => 'filename',
+                'format' => 'raw',
+                'value' => function (\app\models\Lesson $model) {
+                    return Html::a('Yuklab olish', ['download-file', 'id' => $model->uuid], ['class' => 'btn btn-success']);
+                }
+            ],
             'description:ntext',
-            'module_id',
-                                [
-                        'attribute' => 'status',
-                        'value' => function (Book $book) {
-                            return \app\components\Globals::getStatuses()[$book->status];
-                        }
-                    ],
+            [
+                'attribute' => 'module_id',
+                'value' => function (\app\models\Lesson $model) {
+                    return $model->module->name ?? '';
+                }
+            ],
+            [
+                'attribute' => 'status',
+                'value' => function (\app\models\Lesson $model) {
+                    return \app\models\Lesson::STATUSES[$model->status] ?? '';
+                }
+            ],
             [
                 'attribute' => 'created_at',
-                'value' => function (\app\models\Order $order) {
-                    return Yii::$app->formatter->asDatetime($order->created_at, 'php:d.m.Y H:i:s');
+                'value' => function (\app\models\Lesson $model) {
+                    return Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i:s');
                 }
             ],
-                        [
+            [
                 'attribute' => 'updated_at',
-                'value' => function (\app\models\Order $order) {
-                    return Yii::$app->formatter->asDatetime($order->updated_at, 'php:d.m.Y H:i:s');
+                'value' => function (\app\models\Lesson $model) {
+                    return Yii::$app->formatter->asDatetime($model->updated_at, 'php:d.m.Y H:i:s');
                 }
             ],
-            'created_by',
-            'updated_by',
+            [
+                'attribute' => 'created_by',
+                'value' => function (\app\models\Lesson $model) {
+                    return $model->createdBy->name ?? '';
+                }
+            ],
+            [
+                'attribute' => 'updated_by',
+                'value' => function (\app\models\Lesson $model) {
+                    return $model->updatedBy->name ?? '';
+                }
+            ]
         ],
     ]) ?>
 

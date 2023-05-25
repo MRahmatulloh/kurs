@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Lesson;
 use app\models\search\LessonSearch;
 use Yii;
+use yii\base\Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -40,13 +41,15 @@ class LessonController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new LessonSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        return $this->redirect(['module/index']);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+//        $searchModel = new LessonSearch();
+//        $dataProvider = $searchModel->search($this->request->queryParams);
+//
+//        return $this->render('index', [
+//            'searchModel' => $searchModel,
+//            'dataProvider' => $dataProvider,
+//        ]);
     }
 
     /**
@@ -69,7 +72,11 @@ class LessonController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Lesson();
+        $model = new Lesson(
+            [
+                'status' => Lesson::STATUS_ACTIVE,
+            ]
+        );
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -84,7 +91,11 @@ class LessonController extends Controller
 
     public function actionCreateAjax()
     {
-        $model = new Lesson();
+        $model = new Lesson(
+            [
+                'status' => Lesson::STATUS_ACTIVE,
+            ]
+        );
 
         if ($this->request->isAjax && $model->load($this->request->post())) {
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -93,6 +104,7 @@ class LessonController extends Controller
 
         if ($this->request->isPost && $model->load($this->request->post())) {
             $model->uuid = format_uuidv4(random_bytes(16));
+            $model->created_by = Yii::$app->user->identity->id;
 
             $model->file = UploadedFile::getInstance($model, 'file');
             if ($model->file){
@@ -120,6 +132,21 @@ class LessonController extends Controller
         ]);
     }
 
+    public function actionDownloadFile($id)
+    {
+        $model = $this->findModel($id);
+
+        if (!Yii::$app->user->identity->isRoleUser('admin')){
+            throw new Exception('Sizga ruxsat berilmagan');
+        }
+
+        if (file_exists($model->getFilePath()) && !is_dir($model->getFilePath())){
+            return Yii::$app->response->sendFile($model->getFilePath());
+        } else{
+            throw new Exception('Fayl topilmadi');
+        }
+    }
+
     /**
      * Updates an existing Lesson model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -131,8 +158,28 @@ class LessonController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $model->updated_by = Yii::$app->user->identity->id;
+
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if ($model->file){
+                $model->filename = $model->uuid . '.' . $model->file->extension;
+                $model->file->saveAs($model->getFilePath(), false);
+            }
+
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно сохранены'));
+            }else{
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Unable save data. {title}: {errors}', [
+                    'title' => $model->getTitle(),
+                    'errors' => json_encode($model->getErrors()),
+                ]));
+            }
+
+            return $this->redirect([
+                'module/index',
+                'id' => $model->module_id
+            ]);
         }
 
         return $this->render('update', [
@@ -149,7 +196,17 @@ class LessonController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+
+        $res = $this->findModel($id)->delete();
+
+        if ($res){
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно удалены'));
+        }else{
+            Yii::$app->session->setFlash('error', Yii::t('app', 'Unable delete data. {title}: {errors}', [
+                'title' => $this->findModel($id)->getTitle(),
+                'errors' => json_encode($this->findModel($id)->getErrors()),
+            ]));
+        }
 
         return $this->redirect(['index']);
     }
@@ -163,7 +220,7 @@ class LessonController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Lesson::findOne(['id' => $id])) !== null) {
+        if (($model = Lesson::findOne(['uuid' => $id])) !== null) {
             return $model;
         }
 

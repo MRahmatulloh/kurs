@@ -9,13 +9,13 @@ use yii\widgets\DetailView;
 /** @var app\models\Module $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Modules', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Darslar', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="module-view">
 
-    <p>
+    <p class="text-right">
         <?= Html::a('Yangilash', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('O\'chirish', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -32,7 +32,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'description:ntext',
-            'course_id',
+            [
+                'attribute' => 'course_id',
+                'value' => function (Module $module) {
+                    return $module->course->name ?? '';
+                }
+            ],
             [
                 'attribute' => 'status',
                 'value' => function (Module $module) {
@@ -45,14 +50,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i:s');
                 }
             ],
-                        [
+            [
                 'attribute' => 'updated_at',
                 'value' => function (\app\models\Module $model) {
                     return Yii::$app->formatter->asDatetime($model->updated_at, 'php:d.m.Y H:i:s');
                 }
             ],
-            'created_by',
-            'updated_by',
+            [
+                'attribute' => 'created_by',
+                'value' => function (\app\models\Module $model) {
+                    return $model->createdBy->name ?? '';
+                }
+            ],
+            [
+                'attribute' => 'updated_by',
+                'value' => function (\app\models\Module $model) {
+                    return $model->updatedBy->name ?? '';
+                }
+            ]
         ],
     ]) ?>
 

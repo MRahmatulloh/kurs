@@ -31,7 +31,7 @@ use yii\bootstrap4\Breadcrumbs;
                     echo Breadcrumbs::widget([
                         'homeLink' => [
                             'label' => 'Bosh sahifa',
-                            'url' => '/',
+                            'url' => '/site/index',
                         ],
                         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                         'options' => [

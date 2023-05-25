@@ -66,11 +66,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     </video>
                 </div>
                 <div class="card-body fs-6 text-white text-start">
-                                    <span class="d-flex justify-content-between align-items-center">
-                                        <span class="fs-4"><?= $lesson->name ?? '' ?></span>
-                                        <a href="#" class="text-white btn btn-success rounded-pill fs-5">Keyingi darsga o’tish <i
-                                                class="fa fa-angle-right"></i></a>
-                                    </span>
+                    <span class="d-flex justify-content-between align-items-center">
+                        <span class="fs-4"><?= $lesson->name ?? '' ?></span>
+                        <a href="<?= \yii\helpers\Url::to(['', 'lesson_id' => $lesson_id, 'next' => true]) ?>"
+                           class="text-white btn btn-success rounded-pill fs-5">Keyingi darsga o’tish <i
+                                class="fa fa-angle-right"></i></a>
+                    </span>
                 </div>
             </div>
         </div>
@@ -98,18 +99,24 @@ $this->params['breadcrumbs'][] = $this->title;
                             </span>
                     </span>
                     <div class="collapse" id="<?= "module" . $module->id ?>">
-                        <?php foreach ($module->lessons as $lessons): ?>
+                        <?php foreach ($module->lessons as $lesson): ?>
                             <div class="wrappere pl-2"
                                  style="border-left: 10px solid rgba(13, 53, 17, .9); border-radius: 10px">
                                 <div class="card card-body py-2 bg-site-primary ">
                                 <span class="w-100 d-flex justify-content-between align-items-center rounded">
-                                    <span class="fs-6"><?= $lessons->name ?></span>
+                                    <span class="fs-6"><?= $lesson->name ?></span>
                                     <span class="text-right d-inline-block">
                                                 <div>
-                                                    <?= Html::a('<i class="fa fa-eye text-white"></i>', ['index', 'id' => $module->id, 'lesson_id' => $lessons->id], ['class' => 'btn btn-white white', 'title' => 'Ko\'rish']) ?>
+                                                    <?php if (Yii::$app->user->can('admin') && $lesson->status == Lesson::STATUS_DEMO): ?>
+                                                        <?= Html::a('<i class="fa fa-lock-open text-white"></i>', ['#'], ['class' => 'btn btn-white white', 'title' => 'Yangilash']) ?>
+                                                    <?php elseif (Yii::$app->user->can('admin') && $lesson->status == Lesson::STATUS_ACTIVE): ?>
+                                                        <?= Html::a('<i class="fa fa-lock text-white"></i>', ['#'], ['class' => 'btn btn-white white', 'title' => 'Yangilash']) ?>
+                                                    <?php endif; ?>
+
+                                                    <?= Html::a('<i class="fa fa-eye text-white"></i>', ['index', 'id' => $module->id, 'lesson_id' => $lesson->uuid], ['class' => 'btn btn-white white', 'title' => 'Ko\'rish']) ?>
                                                     <?php if (Yii::$app->user->can('admin')): ?>
-                                                        <?= Html::a('<i class="fa fa-pen text-white"></i>', ['lesson/update', 'id' => $module->id], ['class' => 'btn btn-white white', 'title' => 'Yangilash']) ?>
-                                                        <?= Html::a('<i class="fa fa-trash text-white"></i>', ['lesson/delete', 'id' => $module->id], ['class' => 'btn btn-white white', 'title' => 'O\'chirish', 'data-method' => 'post', 'data-confirm' => Yii::t('yii', 'Вы уверены, что хотите удалить этот элемент?'),]) ?>
+                                                        <?= Html::a('<i class="fa fa-pen text-white"></i>', ['lesson/update', 'id' => $lesson->uuid], ['class' => 'btn btn-white white', 'title' => 'Yangilash']) ?>
+                                                        <?= Html::a('<i class="fa fa-trash text-white"></i>', ['lesson/delete', 'id' => $lesson->uuid], ['class' => 'btn btn-white white', 'title' => 'O\'chirish', 'data-method' => 'post', 'data-confirm' => Yii::t('yii', 'Вы уверены, что хотите удалить этот элемент?'),]) ?>
                                                     <?php endif; ?>
                                                 </div>
                                     </span>

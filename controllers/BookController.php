@@ -184,6 +184,10 @@ class BookController extends Controller
     {
         $model = $this->findModel($id);
 
+        if ($model->isPurchased()){
+            throw new Exception('Sizga ruxsat berilmagan');
+        }
+
         if (file_exists($model->getFilePath()) && !is_dir($model->getFilePath())){
             return Yii::$app->response->sendFile($model->getFilePath());
         } else{

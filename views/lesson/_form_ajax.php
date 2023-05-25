@@ -13,7 +13,7 @@ use yii\bootstrap5\ActiveForm;
 <div class="lesson-form">
 
     <?php $form = ActiveForm::begin([
-        'action' => '/lesson/create-ajax',
+        'action' => $model->isNewRecord ? ['/lesson/create-ajax'] : ['lesson/update', 'id' => $model->id],
     ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
@@ -33,7 +33,7 @@ use yii\bootstrap5\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'status')->dropDownList(Globals::getStatuses(), [
+    <?= $form->field($model, 'status')->dropDownList(\app\models\Lesson::STATUSES, [
         'class' => 'form-control',
     ]) ?>
 
