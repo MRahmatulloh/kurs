@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="d-flex justify-content-center my-5">
             <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">
                 <input type="hidden" name="wants" value="course"/>
-                <input type="hidden" name="id" value="6d81cd8c-b0c1-4122-95bb-ce1a30f2644d"/>
+                <input type="hidden" name="id" value="3ffb626c-07b2-4928-a5eb-4ee1e78c1f2c"/>
                 <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
                 <button class="btn btn-success my-3 rounded rounded-pill fs-3 px-4" type="submit">Sotib olish</button>
             </form>
@@ -153,7 +153,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="d-flex justify-content-center my-5">
             <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">
                 <input type="hidden" name="wants" value="course"/>
-                <input type="hidden" name="id" value="6d81cd8c-b0c1-4122-95bb-ce1a30f2644d"/>
+                <input type="hidden" name="id" value="3ffb626c-07b2-4928-a5eb-4ee1e78c1f2c"/>
                 <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
                 <button class="btn btn-success my-3 rounded rounded-pill fs-3 px-4" type="submit">Kursni sotib olish
                 </button>

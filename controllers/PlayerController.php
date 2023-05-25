@@ -12,7 +12,7 @@ class PlayerController extends Controller
     public function actionPlay($id = null)
     {
         $user = Yii::$app->user->identity;
-        $ordered = Order::findOne(['wants_id' => '6d81cd8c-b0c1-4122-95bb-ce1a30f2644d', 'user_id' => Yii::$app->user->identity->id, 'status' => Order::STATUS_APPROVED]);
+        $ordered = Order::findOne(['wants_id' => '3ffb626c-07b2-4928-a5eb-4ee1e78c1f2c', 'user_id' => Yii::$app->user->identity->id, 'status' => Order::STATUS_APPROVED]);
 
         if ($user->isRoleUser('pupil') && !$ordered) {
             return null;
