@@ -1,10 +1,10 @@
 <?php
 
 use app\models\Order;
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
-use yii\grid\GridView;
 
 /** @var yii\web\View $this */
 /** @var app\models\search\OrderSearch $searchModel */
@@ -12,6 +12,7 @@ use yii\grid\GridView;
 
 $this->title = 'Buyurtmalar';
 $this->params['breadcrumbs'][] = $this->title;
+\app\assets\AppAsset::register($this);
 ?>
 <div class="order-index">
 
@@ -31,7 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => \app\models\User::selectList(),
                 'filterInputOptions' => [
-                    'prompt' => 'Hammasi'
+                    'prompt' => 'Hammasi',
+                    'class' => 'form-control'
                 ]
             ],
             [
@@ -41,7 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => \app\models\Order::WANTS,
                 'filterInputOptions' => [
-                    'prompt' => 'Hammasi'
+                    'prompt' => 'Hammasi',
+                    'class' => 'form-control'
                 ]
             ],
             [
@@ -66,7 +69,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => \app\components\Globals::getOrderStatuses(),
                 'filterInputOptions' => [
-                    'prompt' => 'Hammasi'
+                    'prompt' => 'Hammasi',
+                    'class' => 'form-control'
                 ]
             ],
             [
