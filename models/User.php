@@ -219,4 +219,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->hasMany(Order::class, ['user_id' => 'id']);
     }
 
+    public function isPurchasedCourse(){
+        return Order::find(['wants_id' => '3ffb626c-07b2-4928-a5eb-4ee1e78c1f2c', 'user_id' => Yii::$app->user->identity->id, 'status' => Order::STATUS_APPROVED])->exists();
+    }
+
 }
