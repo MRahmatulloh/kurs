@@ -44,18 +44,16 @@ if (Yii::$app->user->identity->isRoleUser('admin')) {
 
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="/order/index">
+            <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell text-white"></i>
                 <span class="badge badge-warning navbar-badge"><?= $orderCount ?? 0; ?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-header"><?= $orderCount ?? 0; ?> Xabarlar</span>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
+                <a href="/order/index" class="dropdown-item">
                     <i class="fas fa-file mr-2"></i> <?= $orderCount ?? 0; ?> yangi buyurtmalar
                 </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
 
