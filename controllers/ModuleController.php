@@ -139,9 +139,9 @@ class ModuleController extends Controller
             if ($model->load($this->request->post())) {
                 $model->created_by = Yii::$app->user->id;
                 if ($model->save()) {
-                    Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно сохранены'));
+                    Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
                 }else{
-                    Yii::$app->session->setFlash('error', Yii::t('app', 'Unable save data. {title}: {errors}', [
+                    Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!. {title}: {errors}', [
                         'title' => $model->getTitle(),
                         'errors' => json_encode($model->getErrors()),
                     ]));
@@ -167,9 +167,9 @@ class ModuleController extends Controller
         if ($this->request->isPost && $model->load($this->request->post())) {
             $model->created_by = Yii::$app->user->id;
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно сохранены'));
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
             }else{
-                Yii::$app->session->setFlash('error', Yii::t('app', 'Unable save data. {title}: {errors}', [
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!. {title}: {errors}', [
                     'title' => $model->getTitle(),
                     'errors' => json_encode($model->getErrors()),
                 ]));
@@ -197,9 +197,9 @@ class ModuleController extends Controller
         if ($this->request->isPost && $model->load($this->request->post())) {
             $model->updated_by = Yii::$app->user->id;
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно сохранены'));
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
             }else{
-                Yii::$app->session->setFlash('error', Yii::t('app', 'Unable save data. {title}: {errors}', [
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!. {title}: {errors}', [
                     'title' => $model->getTitle(),
                     'errors' => json_encode($model->getErrors()),
                 ]));

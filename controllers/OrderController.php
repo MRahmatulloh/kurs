@@ -78,10 +78,10 @@ class OrderController extends Controller
                 $model->uuid = format_uuidv4(random_bytes(16));
 
                 if ($model->save()){
-                    Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно сохранены'));
+                    Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
                     return $this->redirect(['view', 'id' => $model->id]);
                 }else{
-                    Yii::$app->session->setFlash('error', Yii::t('app', 'Unable save data'));
+                    Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!'));
                 }
             }
         }

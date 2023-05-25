@@ -113,9 +113,9 @@ class LessonController extends Controller
             }
 
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно сохранены'));
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
             }else{
-                Yii::$app->session->setFlash('error', Yii::t('app', 'Unable save data. {title}: {errors}', [
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!. {title}: {errors}', [
                     'title' => $model->getTitle(),
                     'errors' => json_encode($model->getErrors()),
                 ]));
@@ -168,9 +168,9 @@ class LessonController extends Controller
             }
 
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно сохранены'));
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
             }else{
-                Yii::$app->session->setFlash('error', Yii::t('app', 'Unable save data. {title}: {errors}', [
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!. {title}: {errors}', [
                     'title' => $model->getTitle(),
                     'errors' => json_encode($model->getErrors()),
                 ]));

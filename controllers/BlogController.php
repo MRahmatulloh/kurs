@@ -85,11 +85,11 @@ class BlogController extends Controller
                 }
 
                 if ($model->save()){
-                    Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно сохранены'));
+                    Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
                     return $this->redirect(['view', 'id' => $model->id]);
                 }else{
                     prd($model->attributes);
-                    Yii::$app->session->setFlash('error', Yii::t('app', 'Unable save data'));
+                    Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!'));
                 }
             }
         }
@@ -134,11 +134,11 @@ class BlogController extends Controller
                 }
 
                 if ($model->save()){
-                    Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно сохранены'));
+                    Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
                     return $this->redirect(['view', 'id' => $model->id]);
                 }else{
                     prd($model->attributes);
-                    Yii::$app->session->setFlash('error', Yii::t('app', 'Unable save data'));
+                    Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!'));
                 }
             }
         }
