@@ -71,7 +71,7 @@ class ModuleController extends Controller
             }
 
             if ($nextLesson) {
-                return $this->redirect(['index', 'id' => $id, 'lesson_id' => $nextLesson->uuid]);
+                return $this->redirect(['index', 'id' => $nextLesson->module_id, 'lesson_id' => $nextLesson->uuid]);
             }
             else{
                 $moduleList = Module::find()->orderBy('name ASC')->all();
