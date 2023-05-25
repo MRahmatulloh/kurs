@@ -28,13 +28,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'user_id',
                 'value' => function (\app\models\Order $order) {
                     return $order->user->name;
-                }
+                },
+                'filter' => \app\models\User::selectList(),
+                'filterInputOptions' => [
+                    'prompt' => 'Hammasi'
+                ]
             ],
             [
                 'attribute' => 'wants',
                 'value' => function (\app\models\Order $order) {
                     return \app\models\Order::WANTS[$order->wants] ?? null;
-                }
+                },
+                'filter' => \app\models\Order::WANTS,
+                'filterInputOptions' => [
+                    'prompt' => 'Hammasi'
+                ]
             ],
             [
                 'attribute' => 'wants_id',
@@ -48,25 +56,32 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::a(($order->getWantedObject())->name ?? null, ['module/index']);
 
                     return ($order->getWantedObject())->name ?? null;
-                }
+                },
+                'filter' => ''
             ],
             [
                 'attribute' => 'status',
                 'value' => function (\app\models\Order $order) {
                     return \app\components\Globals::getOrderStatuses()[$order->status];
-                }
+                },
+                'filter' => \app\components\Globals::getOrderStatuses(),
+                'filterInputOptions' => [
+                    'prompt' => 'Hammasi'
+                ]
             ],
             [
                 'attribute' => 'created_at',
                 'value' => function (\app\models\Order $order) {
                     return Yii::$app->formatter->asDatetime($order->created_at, 'php:d.m.Y H:i:s');
-                }
+                },
+                'filter' => ''
             ],
             [
                 'attribute' => 'updated_at',
                 'value' => function (\app\models\Order $order) {
                     return Yii::$app->formatter->asDatetime($order->updated_at, 'php:d.m.Y H:i:s');
-                }
+                },
+                'filter' => ''
             ],
             [
                 'class' => ActionColumn::className(),
