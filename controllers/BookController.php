@@ -187,13 +187,15 @@ class BookController extends Controller
         $model = $this->findModel($id);
 
         if (!$model->isPurchased()){
-            throw new Exception('Sizga ruxsat berilmagan');
+            Yii::$app->session->setFlash('error', Yii::t('app', 'Iltimos, kitobni sotib oling!'));
+            return $this->redirect(Yii::$app->request->referrer);
         }
 
         if (file_exists($model->getFilePath()) && !is_dir($model->getFilePath())){
             return Yii::$app->response->sendFile($model->getFilePath());
         } else{
-            throw new Exception('Fayl topilmadi');
+            Yii::$app->session->setFlash('error', Yii::t('app', 'Fayl topilmadi'));
+            return $this->redirect(Yii::$app->request->referrer);
         }
     }
 
@@ -204,7 +206,8 @@ class BookController extends Controller
         if (file_exists($model->getPhotoFilePath()) && !is_dir($model->getPhotoFilePath())){
             return Yii::$app->response->sendFile($model->getPhotoFilePath());
         } else{
-            throw new Exception('Rasm topilmadi');
+            Yii::$app->session->setFlash('error', Yii::t('app', 'Rasm topilmadi'));
+            return $this->redirect(Yii::$app->request->referrer);
         }
     }
 
@@ -217,7 +220,8 @@ class BookController extends Controller
             if (file_exists($model->getFilePath()) && !is_dir($model->getFilePath())){
                 return Yii::$app->response->sendFile($model->getFilePath());
             } else{
-                throw new Exception('Fayl topilmadi');
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Fayl topilmadi'));
+                return $this->redirect(Yii::$app->request->referrer);
             }
         }
     }

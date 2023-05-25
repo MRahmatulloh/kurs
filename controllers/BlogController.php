@@ -88,7 +88,6 @@ class BlogController extends Controller
                     Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
                     return $this->redirect(['view', 'id' => $model->id]);
                 }else{
-                    prd($model->attributes);
                     Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!'));
                 }
             }
@@ -106,7 +105,8 @@ class BlogController extends Controller
         if (file_exists($model->getPhotoFilePath()) && !is_dir($model->getPhotoFilePath())){
             return Yii::$app->response->sendFile($model->getPhotoFilePath());
         } else{
-            throw new Exception('Rasm topilmadi');
+            Yii::$app->session->setFlash('error', Yii::t('app', 'Rasm topilmadi'));
+            return $this->redirect(Yii::$app->request->referrer);
         }
     }
 
@@ -137,7 +137,6 @@ class BlogController extends Controller
                     Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
                     return $this->redirect(['view', 'id' => $model->id]);
                 }else{
-                    prd($model->attributes);
                     Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!'));
                 }
             }
