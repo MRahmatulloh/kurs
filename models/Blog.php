@@ -18,8 +18,10 @@ use yii\behaviors\TimestampBehavior;
 class Blog extends \yii\db\ActiveRecord
 {
     public $image;
-
     public $photoPath;
+    public const STATUS_ACTIVE = 10;
+    public const STATUS_INACTIVE = 0;
+
 
     public function __construct($config = [])
     {

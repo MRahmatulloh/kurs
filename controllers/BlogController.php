@@ -70,7 +70,9 @@ class BlogController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Blog();
+        $model = new Blog([
+            'status' => Blog::STATUS_ACTIVE
+        ]);
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
