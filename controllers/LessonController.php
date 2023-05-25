@@ -97,6 +97,10 @@ class LessonController extends Controller
             ]
         );
 
+        if ($this->request->isGet){
+            return $this->redirect(['module/index']);
+        }
+
         if ($this->request->isAjax && $model->load($this->request->post())) {
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return \yii\widgets\ActiveForm::validate($model);
