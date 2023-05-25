@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Book;
+use yii\bootstrap5\LinkPager;
 use yii\helpers\Html;
 use app\assets\AppAsset;
 
@@ -117,6 +118,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
                 <?php endforeach; ?>
+                <?= LinkPager::widget([
+                    'options' => [
+                        'class' => 'd-flex justify-content-center mt-5',
+                    ],
+                    'pagination' => $dataProvider->pagination,
+                ]); ?>
 
                 <?php if (Yii::$app->user->can('admin')): ?>
                     <div class="col-4 bg-light pb-3">
