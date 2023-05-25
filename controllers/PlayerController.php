@@ -16,7 +16,7 @@ class PlayerController extends Controller
 
         $lesson = \app\models\Lesson::findOne(['uuid' => $id]);
 
-        if ($user->isRoleUser('pupil') && (!$ordered or $lesson->status == \app\models\Lesson::STATUS_DEMO)) {
+        if ($user->isRoleUser('pupil') && (!$ordered or $lesson->status != \app\models\Lesson::STATUS_DEMO)) {
             return null;
         }
 
