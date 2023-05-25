@@ -1,7 +1,13 @@
 <?php
 
+use app\models\Order;
 use yii\helpers\Html;
 
+if (Yii::$app->user->identity->isRoleUser('admin')) {
+    $orderCount = Order::find()->where(['status' => Order::STATUS_NEW])->count();
+}else{
+    $orderCount = Order::find()->where(['user_id' => Yii::$app->user->identity->id, 'status' => Order::STATUS_APPROVED])->count();
+}
 ?>
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #3D3E42; color: white!important;">
@@ -38,26 +44,15 @@ use yii\helpers\Html;
 
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
+            <a class="nav-link" data-toggle="dropdown" href="/order/index">
                 <i class="far fa-bell text-white"></i>
-                <span class="badge badge-warning navbar-badge">15</span>
+                <span class="badge badge-warning navbar-badge"><?= $orderCount ?? 0; ?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-header">15 Notifications</span>
+                <span class="dropdown-header"><?= $orderCount ?? 0; ?> Xabarlar</span>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> 4 new messages
-                    <span class="float-right text-muted text-sm">3 mins</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-users mr-2"></i> 8 friend requests
-                    <span class="float-right text-muted text-sm">12 hours</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-file mr-2"></i> 3 new reports
-                    <span class="float-right text-muted text-sm">2 days</span>
+                    <i class="fas fa-file mr-2"></i> <?= $orderCount ?? 0; ?> yangi buyurtmalar
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
