@@ -71,6 +71,7 @@ class ModuleController extends Controller
             }
 
             if ($nextLesson) {
+                $lesson = $nextLesson;
                 return $this->redirect(['index', 'id' => $nextLesson->module_id, 'lesson_id' => $nextLesson->uuid]);
             }
             else{
