@@ -84,7 +84,7 @@ class ModuleController extends Controller
 
                 if ($nextModule){
                     $nextLesson = $nextModule->lessons[0] ?? $lesson->uuid;
-                    return $this->redirect(['index', 'id' => ($nextModule->id ?? $id), 'lesson_id' => $nextLesson->uuid]);
+                    return $this->redirect(['index', 'id' => ($nextModule->id ?? $id), 'lesson_id' => ($nextLesson->uuid ?? $lesson_id)]);
                 }
             }
         }
