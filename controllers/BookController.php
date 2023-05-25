@@ -87,7 +87,9 @@ class BookController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Book();
+        $model = new Book([
+            'status' => Book::STATUS_ACTIVE,
+        ]);
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {

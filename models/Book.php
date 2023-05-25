@@ -25,6 +25,9 @@ class Book extends \yii\db\ActiveRecord
 {
     use SelectListTrait;
 
+    public const STATUS_ACTIVE = 10;
+    public const STATUS_INACTIVE = 0;
+
     public $file;
     public $image;
 
