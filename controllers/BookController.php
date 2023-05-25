@@ -186,7 +186,7 @@ class BookController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->isPurchased()){
+        if (!$model->isPurchased()){
             throw new Exception('Sizga ruxsat berilmagan');
         }
 
