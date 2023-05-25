@@ -14,11 +14,12 @@ class PlayerController extends Controller
         $user = Yii::$app->user->identity;
         $ordered = Order::findOne(['wants_id' => '3ffb626c-07b2-4928-a5eb-4ee1e78c1f2c', 'user_id' => Yii::$app->user->identity->id, 'status' => Order::STATUS_APPROVED]);
 
-        if ($user->isRoleUser('pupil') && !$ordered) {
+        $lesson = \app\models\Lesson::findOne(['uuid' => $id]);
+
+        if ($user->isRoleUser('pupil') && (!$ordered or $lesson->status == \app\models\Lesson::STATUS_DEMO)) {
             return null;
         }
 
-        $lesson = \app\models\Lesson::findOne(['uuid' => $id]);
         $videoPath = Yii::getAlias('@app') . '/files/lessons/' . $lesson->filename;
         $stream = new VideoStream($videoPath);
         $stream->start();
