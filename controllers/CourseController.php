@@ -101,7 +101,9 @@ class CourseController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Course();
+        $model = new Course([
+            'status' => Course::STATUS_ACTIVE
+        ]);
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {

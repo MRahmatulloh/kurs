@@ -21,7 +21,7 @@ use yii\bootstrap5\ActiveForm;
     <?= $form->field($model, 'course_id')->widget(Select2::classname(), [
         'data' => \app\models\Course::selectList(),
         'language' => 'en',
-        'options' => ['placeholder' => 'Kursni tanlang ...'],
+//        'options' => ['placeholder' => 'Kursni tanlang ...'],
         'pluginOptions' => [
             'allowClear' => true
         ],

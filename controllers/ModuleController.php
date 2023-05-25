@@ -131,7 +131,9 @@ class ModuleController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Module();
+        $model = new Module([
+            'status' => Module::STATUS_ACTIVE,
+        ]);
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {

@@ -27,6 +27,8 @@ use yii\behaviors\TimestampBehavior;
 class Course extends \yii\db\ActiveRecord
 {
     use SelectListTrait;
+    public const STATUS_ACTIVE = 10;
+    public const STATUS_INACTIVE = 0;
     /**
      * {@inheritdoc}
      */
