@@ -2,6 +2,7 @@
 
 namespace app\models\search;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Module;
@@ -49,6 +50,10 @@ class ModuleSearch extends Module
         ]);
 
         $this->load($params);
+
+        if($req = Yii::$app->request->get('query')){
+            $this->name = $req;
+        }
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
