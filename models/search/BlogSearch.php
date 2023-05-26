@@ -2,6 +2,7 @@
 
 namespace app\models\search;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Blog;
@@ -49,6 +50,10 @@ class BlogSearch extends Blog
         ]);
 
         $this->load($params);
+
+        if($req = Yii::$app->request->get('query')){
+            $this->title = $req;
+        }
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails

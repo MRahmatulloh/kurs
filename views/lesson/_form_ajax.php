@@ -1,6 +1,5 @@
 <?php
 
-use app\components\Globals;
 use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;

@@ -9,6 +9,11 @@ if (Yii::$app->user->identity->isRoleUser('admin')) {
     $orderCount = Order::find()->where(['user_id' => Yii::$app->user->identity->id, 'status' => Order::STATUS_APPROVED])->count();
 }
 ?>
+<style>
+    .input-group-sm>.custom-select, .input-group-sm>.form-control:not(textarea) {
+        height: calc(1.8125rem + 6px)!important;
+    }
+</style>
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #3D3E42; color: white!important;">
     <!-- Left navbar links -->
@@ -28,7 +33,7 @@ if (Yii::$app->user->identity->isRoleUser('admin')) {
             <div class="navbar-search-block">
                 <form class="form-inline">
                     <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control form-control-navbar" type="search" name = "query" placeholder="Izlash" aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-navbar" type="submit">
                                 <i class="fas fa-search"></i>

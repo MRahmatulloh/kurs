@@ -8,7 +8,6 @@ use mdm\admin\models\form\ChangePassword;
 use mdm\admin\models\searchs\User as UserSearch;
 use Yii;
 use yii\web\Controller;
-use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
 

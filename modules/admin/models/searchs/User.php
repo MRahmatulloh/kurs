@@ -52,6 +52,10 @@ class User extends Model
             $query->andWhere(['id' => $ids]);
         }
 
+        if($req = Yii::$app->request->get('query')){
+            $this->name = $req;
+        }
+
         $this->load($params);
         if (!$this->validate()) {
             $query->where('1=0');

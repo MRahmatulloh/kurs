@@ -176,7 +176,7 @@ class ModuleController extends Controller
                 ]));
             }
 
-            return $this->redirect(['course/details', 'id' => $model->course_id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         }
 
         return $this->renderAjax('create_ajax', [

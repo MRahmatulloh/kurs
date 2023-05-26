@@ -97,15 +97,15 @@ class LessonController extends Controller
                 'status' => Lesson::STATUS_ACTIVE,
             ]
         );
-        $model->scenario = 'create';
-
-        if ($this->request->isGet) {
-            return $this->redirect(['module/index']);
-        }
+//        $model->scenario = 'create';
 
         if ($this->request->isAjax && $model->load($this->request->post())) {
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return \yii\widgets\ActiveForm::validate($model);
+        }
+
+        if ($this->request->isGet) {
+            return $this->redirect(['module/index']);
         }
 
         if ($this->request->isPost && $model->load($this->request->post())) {

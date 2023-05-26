@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Admin panel';
+$this->title = 'Boshqaruv paneli';
 $this->params['breadcrumbs'] = [['label' => $this->title]];
 ?>
 <div class="container-fluid">

@@ -25,18 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
         background: rgba(0, 0, 0, .6) !important;
         color: white !important;
     }
-
-    .bg2 {
-        background-color: #0D3511;
-    }
-
-    .bg3 {
-        background-color: #1F4323;
-    }
-
-    .bg4 {
-        background-color: #1f5022;
-    }
 </style>
 
 <div class="module-index">
@@ -132,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="card card-body py-2 bg-site-primary">
                                 <span class="w-100 my-1 d-flex justify-content-end align-items-center rounded">
                                 <span class="d-inline-block">
-                                                <?= Html::button('<i class="fa fa-fw fa-plus text-white"></i>', ['class' => 'btn btn-light border-0 text-center bg-gray showModalButton', 'title' => 'Qo\'shish', 'id' => 'modalButton']) ?>
+                                                <?= Html::button('<i class="fa fa-fw fa-plus text-white"></i>', ['class' => 'btn btn-light border-0 text-center bg-gray showModalButton', 'title' => 'Qo\'shish']) ?>
                                 </span>
                                 </span>
                                 </div>
@@ -145,7 +133,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="card card-body p-3 mt-2 bg-site-dark">
                                 <span class="w-100 d-flex justify-content-end align-items-center rounded">
                                 <span class="d-inline-block rounded-circle">
-                                                <?= Html::a('<i class="fa fa-fw fa-plus text-gray"></i>', ['create'], ['class' => 'btn btn-light border-0 text-center bg-light', 'title' => 'Qo\'shish']) ?>
+                                                <?= Html::button('<i class="fa fa-fw fa-plus text-gray"></i>', ['class' => 'btn btn-light border-0 text-center bg-light showModalModuleButton', 'title' => 'Qo\'shish']) ?>
                                 </span>
                                 </span>
                     </div>
@@ -160,17 +148,31 @@ $this->params['breadcrumbs'][] = $this->title;
     Modal::begin([
         'title' => 'Yangi dars qo\'shish',
         'id' => 'modal',
-//        'toggleButton' => [
-//            'label' => 'Dars qo\'shish',
-//            'tag' => 'button',
-//            'class' => 'btn btn-success',
-//        ],
         'footer' => '',
     ]);
     echo '<div>';
     echo $this->render('/lesson/create_ajax', [
         'model' => new Lesson([
             'module_id' => $id,
+        ]),
+    ]);
+    echo '</div>';
+    Modal::end();
+    ?>
+</div>
+
+<div>
+    <?php
+    Modal::begin([
+        'title' => 'Yangi modul qo\'shish',
+        'id' => 'modal-module',
+        'footer' => '',
+    ]);
+    echo '<div>';
+    echo $this->render('/module/create_ajax', [
+        'model' => new Module([
+            'course_id' => 1,
+            'status' => Module::STATUS_ACTIVE
         ]),
     ]);
     echo '</div>';
@@ -195,6 +197,20 @@ $(function() {
              document.getElementById('modalHeader').innerHTML = '<h4>' + $(this).attr('title') + '</h4>';
          } else {
              $('#modal').modal('show')
+                 .find('#modalContent')
+                 .load($(this).attr('value'));
+             document.getElementById('modalHeader').innerHTML = '<h4>' + $(this).attr('title') + '</h4>';
+        }
+    });
+    
+    $(document).on('click', '.showModalModuleButton', function() {
+
+         if ($('#modal-module').hasClass('in')) {
+             $('#modal-module').find('#modalContent')
+                 .load($(this).attr('value'));
+             document.getElementById('modalHeader').innerHTML = '<h4>' + $(this).attr('title') + '</h4>';
+         } else {
+             $('#modal-module').modal('show')
                  .find('#modalContent')
                  .load($(this).attr('value'));
              document.getElementById('modalHeader').innerHTML = '<h4>' + $(this).attr('title') + '</h4>';

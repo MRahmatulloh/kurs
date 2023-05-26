@@ -25,6 +25,7 @@ $this->registerJsFile('js/main.js', ['depends' => '\hail812\adminlte3\assets\Adm
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="/img/logo.svg">
+    <link href="<?= Yii::getAlias('@web') ?>/css/fa/css/all.min.css" rel="stylesheet">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
