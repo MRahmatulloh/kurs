@@ -55,7 +55,7 @@
             <div class="col-5 d-flex text-start align-items-center">
                 <ol class="list-unstyled text-white">
                     <li><a href="/frontend/about-us">Biz haqimizda</a></li>
-                    <li><a href="/frontend/module">Kurs haqida</a></li>
+                    <li><a href="#">Kurs haqida</a></li>
                     <li><a href="/frontend/blogs">Bloglar</a></li>
                     <li><a href="/frontend/books">Online kitoblar</a></li>
                 </ol>

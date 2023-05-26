@@ -358,3 +358,11 @@ footer a:focus{
 ul.auth-clients{
     padding: 0;
 }
+
+.field-booksearch-name{
+    margin-bottom: 0.5rem!important;
+}
+
+.field-blogsearch-title{
+    margin-bottom: 0.5rem!important;
+}

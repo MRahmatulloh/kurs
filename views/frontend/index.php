@@ -25,6 +25,7 @@ $this->title = ' ';
     <link rel="icon" type="image/x-icon" href="/front/img/logo.svg">
     <link href="<?= Yii::getAlias('@web') ?>/front/assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= Yii::getAlias('@web') ?>/front/assets/dist/css/cover.css" rel="stylesheet">
+    <link href="<?= Yii::getAlias('@web') ?>/css/fa/css/all.min.css" rel="stylesheet">
 </head>
 <body class="d-block w-100 text-center text-white">
 
@@ -708,10 +709,11 @@ $this->title = ' ';
 
                         <div class="col-12 mt-5 position-relative">
                             <div class="d-flex justify-content-center">
-                                <a href="/frontend/blogs" class="btn btn-success bg3 my-3 rounded rounded-pill">
+                                <a href="/frontend/blogs" class="btn btn-success bg3 my-3 rounded rounded-pill px-4">
                                         <span
-                                            class="fs-5 px-4">Barchasini ko'rish >
+                                            class="fs-5 pr-2">Barchasini ko'rish
                                         </span>
+                                    <i class="fa fa-1x fa-angle-right"></i>
                                 </a>
                             </div>
                             <div class="blur blur4"></div>
@@ -1045,10 +1047,11 @@ $this->title = ' ';
 
                         <div class="col-12 mt-5 position-relative">
                             <div class="d-flex justify-content-center">
-                                <a href="/frontend/books" class="btn btn-success bg3 my-3 rounded rounded-pill">
+                                <a href="/frontend/books" class="btn btn-success bg3 my-3 rounded rounded-pill px-4">
                                         <span
-                                            class="fs-5 px-4">Barchasini ko'rish ><i class="fa fa-angle-right"></i>
+                                            class="fs-5 ">Barchasini ko'rish
                                         </span>
+                                        <i class="fa fa-1x fa-angle-right"></i>
                                 </a>
                             </div>
                             <div class="blur blur4"></div>

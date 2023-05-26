@@ -135,25 +135,28 @@ $this->title = ' ';
                             foreach ($blogs as $blog):?>
                                 <div class="col-12 bg2 ps-0 m-auto mt-3 d-inline-flex rounded rounded-2">
                                     <img src="<?= Yii::getAlias('@web') . '/img/blogs/' . ($blog->photo ?? 'no-photo.png') ?>" width="350px" alt="">
-                                    <p class="ms-3 pt-3 text-white text-start">
-                                        <?= $blog->title ?>
-                                        <br>
-                                        <?= $blog->text ?>
-                                    </p>
+                                    <div class="ms-3 pt-3 text-white text-start">
+                                        <div class="fs-4 pb-3"><?= $blog->title ?></div>
+                                        <div class=""><?= $blog->text ?></div>
+                                    </div>
                                 </div>
                             <?php endforeach;?>
                             <?= LinkPager::widget([
+                                'options' => [
+                                    'class' => 'd-flex justify-content-center mt-5',
+                                ],
                                 'pagination' => $dataProvider->pagination,
-                            ]);?>
+                            ]); ?>
                         <?php endif;?>
 
                         <div class="col-12 text-center">
                             <div class="d-flex justify-content-center my-5">
-                                <button class="btn btn-success my-3 rounded rounded-pill">
-                                        <span
-                                            class="fs-3 px-4">Kursni sotib olish
-                                        </span>
-                                </button>
+                                <form method="post" action="<?= \yii\helpers\Url::to(['order/buy']) ?>">
+                                    <input type="hidden" name="wants" value="course"/>
+                                    <input type="hidden" name="id" value="3ffb626c-07b2-4928-a5eb-4ee1e78c1f2c"/>
+                                    <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>"/>
+                                    <button class="btn btn-success my-3 rounded rounded-pill fs-3 px-4" type="submit">Kursni sotib olish</button>
+                                </form>
                             </div>
                         </div>
                     </div>
