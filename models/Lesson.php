@@ -75,7 +75,7 @@ class Lesson extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'module_id', 'file'], 'required', 'on' => 'create', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
-            [['name', 'module_id' ], 'required', 'on' => 'update', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
+            [['name', 'module_id'], 'required', 'on' => 'update', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             [['description', 'status'], 'string'],
             [['module_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['uuid', 'name', 'filename'], 'string', 'max' => 255],

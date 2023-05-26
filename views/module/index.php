@@ -167,11 +167,13 @@ $this->params['breadcrumbs'][] = $this->title;
 //        ],
         'footer' => '',
     ]);
-    echo $this->renderAjax('/lesson/create_ajax', [
+    echo '<div>';
+    echo $this->render('/lesson/create_ajax', [
         'model' => new Lesson([
             'module_id' => $id,
         ]),
     ]);
+    echo '</div>';
     Modal::end();
     ?>
 </div>
