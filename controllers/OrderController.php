@@ -109,6 +109,18 @@ class OrderController extends Controller
             if ($wants && $id) {
                 $user = Yii::$app->user->identity;
 
+                $alreadyBought = Order::findOne(['user_id' => $user->id, 'wants_id' => $id, 'wants' => $wants, 'status' => Order::STATUS_APPROVED]);
+                if ($alreadyBought){
+                    Yii::$app->session->setFlash('error', Yii::t('app', 'Siz ushbu mahsulotni sotib olib bo\'lgansiz, muammo yuzasidan ma\'muriyat bilan bog\'laning'));
+                    return $this->redirect(Yii::$app->request->referrer);
+                }
+
+                $alreadyOrdered = Order::findOne(['user_id' => $user->id, 'wants_id' => $id, 'wants' => $wants, 'status' => Order::STATUS_NEW]);
+                if ($alreadyOrdered){
+                    Yii::$app->session->setFlash('error', Yii::t('app', 'Siz ushbu mahsulotga buyurtma bergansiz, iltimos, buyurtma tasdiqlanishini kuting'));
+                    return $this->redirect(Yii::$app->request->referrer);
+                }
+
                 if (!$user->phone){
                     Yii::$app->session->setFlash('error', Yii::t('app', 'Telefon raqami kiritilmagan. Iltimos avval profilingizga telefon raqamingizni kiriting'));
                     return $this->redirect(['user/update', 'id' => $user->id]);
@@ -121,7 +133,7 @@ class OrderController extends Controller
                 $model->status = Order::STATUS_NEW;
 
                 if ($model->save()){
-                    Yii::$app->session->setFlash('success', Yii::t('app', 'Buyurtma qabul qilindi, tez orada siz bilan bog`lanamiz, rahmat'));
+                    Yii::$app->session->setFlash('success', Yii::t('app', 'Buyurtma qabul qilindi, tez orada siz bilan bog`lanamiz, rahmat)'));
                 }else{
                     Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi, iltimos qayta urinib ko`ring'));
                 }
