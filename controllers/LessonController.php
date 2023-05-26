@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\Globals;
 use app\models\Lesson;
 use app\models\search\LessonSearch;
 use Yii;
@@ -96,8 +97,9 @@ class LessonController extends Controller
                 'status' => Lesson::STATUS_ACTIVE,
             ]
         );
+        $model->scenario = 'create';
 
-        if ($this->request->isGet){
+        if ($this->request->isGet) {
             return $this->redirect(['module/index']);
         }
 
@@ -111,17 +113,17 @@ class LessonController extends Controller
             $model->created_by = Yii::$app->user->identity->id;
 
             $model->file = UploadedFile::getInstance($model, 'file');
-            if ($model->file){
+            if ($model->file) {
                 $model->filename = $model->uuid . '.' . $model->file->extension;
                 $model->file->saveAs($model->getFilePath(), false);
             }
 
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
-            }else{
-                Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!. {title}: {errors}', [
+            } else {
+                Yii::$app->session->setFlash('error', Yii::t('app', '{title}: {errors}', [
                     'title' => $model->getTitle(),
-                    'errors' => json_encode($model->getErrors()),
+                    'errors' => \app\components\Globals::errorMessageText($model->getErrors()),
                 ]));
             }
 
@@ -140,13 +142,13 @@ class LessonController extends Controller
     {
         $model = $this->findModel($id);
 
-        if (!Yii::$app->user->identity->isRoleUser('admin')){
+        if (!Yii::$app->user->identity->isRoleUser('admin')) {
             throw new Exception('Sizga ruxsat berilmagan');
         }
 
-        if (file_exists($model->getFilePath()) && !is_dir($model->getFilePath())){
+        if (file_exists($model->getFilePath()) && !is_dir($model->getFilePath())) {
             return Yii::$app->response->sendFile($model->getFilePath());
-        } else{
+        } else {
             throw new Exception('Fayl topilmadi');
         }
     }
@@ -161,22 +163,23 @@ class LessonController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = 'update';
 
         if ($this->request->isPost && $model->load($this->request->post())) {
             $model->updated_by = Yii::$app->user->identity->id;
 
             $model->file = UploadedFile::getInstance($model, 'file');
-            if ($model->file){
+            if ($model->file) {
                 $model->filename = $model->uuid . '.' . $model->file->extension;
                 $model->file->saveAs($model->getFilePath(), false);
             }
 
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
-            }else{
-                Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!. {title}: {errors}', [
+            } else {
+                Yii::$app->session->setFlash('error', Yii::t('app', '{title}: {errors}', [
                     'title' => $model->getTitle(),
-                    'errors' => json_encode($model->getErrors()),
+                    'errors' => \app\components\Globals::errorMessageText($model->getErrors()),
                 ]));
             }
 
@@ -203,13 +206,10 @@ class LessonController extends Controller
 
         $res = $this->findModel($id)->delete();
 
-        if ($res){
-            Yii::$app->session->setFlash('success', Yii::t('app', 'Данные успешно удалены'));
-        }else{
-            Yii::$app->session->setFlash('error', Yii::t('app', 'Unable delete data. {title}: {errors}', [
-                'title' => $this->findModel($id)->getTitle(),
-                'errors' => json_encode($this->findModel($id)->getErrors()),
-            ]));
+        if ($res) {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumot muvaffaqiyatli o\'chirildi'));
+        } else {
+            Yii::$app->session->setFlash('error', Yii::t('app', 'Ma\'lumot o\'chirib bo\'lmadi'));
         }
 
         return $this->redirect(['index']);

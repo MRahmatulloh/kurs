@@ -55,7 +55,7 @@ class Book extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name'], 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             [['description'], 'string'],
             [['price'], 'number'],
             [['author_id', 'status'], 'integer'],

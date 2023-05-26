@@ -50,7 +50,7 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['uuid', 'user_id', 'wants_id', 'wants'], 'required'],
+            [['uuid', 'user_id', 'wants_id', 'wants'], 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             [['user_id', 'status', 'created_at', 'updated_at'], 'integer'],
             [['uuid', 'wants', 'wants_id'], 'string', 'max' => 255],
         ];

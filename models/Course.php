@@ -53,7 +53,7 @@ class Course extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['uuid', 'name'], 'required'],
+            [['uuid', 'name'], 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             [['description'], 'string'],
             [['price'], 'number'],
             [['author_id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],

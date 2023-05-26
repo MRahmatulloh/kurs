@@ -13,7 +13,7 @@ use yii\bootstrap5\ActiveForm;
 <div class="lesson-form">
 
     <?php $form = ActiveForm::begin([
-        'action' => $model->isNewRecord ? ['/lesson/create-ajax'] : ['lesson/update', 'id' => $model->id],
+        'action' => $model->isNewRecord ? ['/lesson/create-ajax'] : ['lesson/update', 'id' => $model->uuid],
     ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>

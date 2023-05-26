@@ -71,7 +71,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'name', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'required'],
+            [['username', 'name', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             [['status', 'created_at', 'updated_at', 'last_login_at'], 'integer'],
             ['email', 'email'],
             ['email', 'unique'],

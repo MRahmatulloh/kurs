@@ -52,7 +52,7 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name'], 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             [['parent_name'], 'in',
                 'range' => static::find()->select(['name'])->column(),
                 'message' => 'Menu "{value}" not found.'],

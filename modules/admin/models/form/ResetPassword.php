@@ -53,7 +53,7 @@ class ResetPassword extends Model
     public function rules()
     {
         return [
-            [['password', 'retypePassword'], 'required'],
+            [['password', 'retypePassword'], 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             ['password', 'string', 'min' => 6],
             ['retypePassword', 'compare', 'compareAttribute' => 'password']
         ];

@@ -6,6 +6,7 @@ use app\models\Order;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -97,7 +98,8 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        prd(1);
+        throw new NotFoundHttpException('The requested page does not exist.');
+
         $this->layout = 'main-login';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();

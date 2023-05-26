@@ -11,6 +11,7 @@ class Globals
             10 => 'Aktiv',
         ];
     }
+
     public static function getOrderStatuses()
     {
         return [
@@ -18,6 +19,27 @@ class Globals
             2 => 'Tasdiqlangan',
             3 => 'Bekor qilingan',
         ];
+    }
+
+    public static function errorMessageText($message)
+    {
+        $text = '<br>';
+
+        if (is_array($message)) {
+            foreach ($message as $value) {
+                if (is_array($value)) {
+                    foreach ($value as $msg) {
+                        $text .= $msg . '<br>';
+                    }
+                } else {
+                    $text .= $value . '<br>';
+                }
+            }
+
+        } else {
+            $text = $message;
+        }
+        return $text;
     }
 
 }

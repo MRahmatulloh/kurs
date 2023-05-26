@@ -52,7 +52,7 @@ class Author extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name'], 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             [['user_id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'last_login'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['phone', 'email'], 'string', 'max' => 100],

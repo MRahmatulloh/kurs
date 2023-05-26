@@ -88,7 +88,10 @@ class BlogController extends Controller
                     Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
                     return $this->redirect(['view', 'id' => $model->id]);
                 }else{
-                    Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!'));
+                                    Yii::$app->session->setFlash('error', Yii::t('app', '{title}: {errors}', [
+                    'title' => $model->getTitle(),
+                    'errors' => \app\components\Globals::errorMessageText($model->getErrors()),
+                ]));
                 }
             }
         }
@@ -137,7 +140,10 @@ class BlogController extends Controller
                     Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
                     return $this->redirect(['view', 'id' => $model->id]);
                 }else{
-                    Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!'));
+                                    Yii::$app->session->setFlash('error', Yii::t('app', '{title}: {errors}', [
+                    'title' => $model->getTitle(),
+                    'errors' => \app\components\Globals::errorMessageText($model->getErrors()),
+                ]));
                 }
             }
         }

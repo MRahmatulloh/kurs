@@ -62,7 +62,7 @@ class Module extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name'], 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             [['description'], 'string'],
             [['course_id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 255],

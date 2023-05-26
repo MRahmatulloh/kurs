@@ -21,7 +21,7 @@ class PasswordResetRequest extends Model
         $class = Yii::$app->getUser()->identityClass ? : 'mdm\admin\models\User';
         return [
             ['email', 'filter', 'filter' => 'trim'],
-            ['email', 'required'],
+            ['email', 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             ['email', 'email'],
             ['email', 'exist',
                 'targetClass' => $class,

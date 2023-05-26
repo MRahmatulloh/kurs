@@ -72,7 +72,7 @@ class BookController extends Controller
     public function actionViewDetail($id)
     {
         $model = Book::findOne(['uuid' => $id]);
-        if (!$model){
+        if (!$model) {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
         }
         return $this->render('view', [
@@ -96,22 +96,25 @@ class BookController extends Controller
                 $model->uuid = format_uuidv4(random_bytes(16));
 
                 $model->file = UploadedFile::getInstance($model, 'file');
-                if ($model->file){
+                if ($model->file) {
                     $model->filename = $model->uuid . '.' . $model->file->extension;
                     $model->file->saveAs($model->getFilePath(), false);
                 }
 
                 $model->image = UploadedFile::getInstance($model, 'image');
-                if ($model->image){
+                if ($model->image) {
                     $model->photo = $model->uuid . '.' . $model->image->extension;
                     $model->image->saveAs($model->getPhotoFilePath(), false);
                 }
 
-                if ($model->save()){
+                if ($model->save()) {
                     Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
                     return $this->redirect(['view', 'id' => $model->id]);
-                }else{
-                    Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!'));
+                } else {
+                    Yii::$app->session->setFlash('error', Yii::t('app', '{title}: {errors}', [
+                        'title' => $model->getTitle(),
+                        'errors' => \app\components\Globals::errorMessageText($model->getErrors()),
+                    ]));
                 }
             }
         }
@@ -136,8 +139,8 @@ class BookController extends Controller
             if ($model->load($this->request->post())) {
 
                 $model->file = UploadedFile::getInstance($model, 'file');
-                if ($model->file){
-                    if (file_exists($model->getFilePath()) && !is_dir($model->getFilePath())){
+                if ($model->file) {
+                    if (file_exists($model->getFilePath()) && !is_dir($model->getFilePath())) {
                         unlink($model->getFilePath());
                     }
                     $model->filename = $model->uuid . '.' . $model->file->extension;
@@ -145,19 +148,22 @@ class BookController extends Controller
                 }
 
                 $model->image = UploadedFile::getInstance($model, 'image');
-                if ($model->image){
-                    if (file_exists($model->getPhotoFilePath()) && !is_dir($model->getPhotoFilePath())){
+                if ($model->image) {
+                    if (file_exists($model->getPhotoFilePath()) && !is_dir($model->getPhotoFilePath())) {
                         unlink($model->getPhotoFilePath());
                     }
                     $model->photo = $model->uuid . '.' . $model->image->extension;
                     $model->image->saveAs($model->getPhotoFilePath(), false);
                 }
 
-                if ($model->save()){
+                if ($model->save()) {
                     Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
                     return $this->redirect(['view', 'id' => $model->id]);
-                }else{
-                    Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!'));
+                } else {
+                    Yii::$app->session->setFlash('error', Yii::t('app', '{title}: {errors}', [
+                        'title' => $model->getTitle(),
+                        'errors' => \app\components\Globals::errorMessageText($model->getErrors()),
+                    ]));
                 }
             }
         }
@@ -185,14 +191,14 @@ class BookController extends Controller
     {
         $model = $this->findModel($id);
 
-        if (!$model->isPurchased()){
+        if (!$model->isPurchased()) {
             Yii::$app->session->setFlash('error', Yii::t('app', 'Iltimos, kitobni sotib oling!'));
             return $this->redirect(Yii::$app->request->referrer);
         }
 
-        if (file_exists($model->getFilePath()) && !is_dir($model->getFilePath())){
+        if (file_exists($model->getFilePath()) && !is_dir($model->getFilePath())) {
             return Yii::$app->response->sendFile($model->getFilePath());
-        } else{
+        } else {
             Yii::$app->session->setFlash('error', Yii::t('app', 'Fayl topilmadi'));
             return $this->redirect(Yii::$app->request->referrer);
         }
@@ -202,9 +208,9 @@ class BookController extends Controller
     {
         $model = $this->findModel($id);
 
-        if (file_exists($model->getPhotoFilePath()) && !is_dir($model->getPhotoFilePath())){
+        if (file_exists($model->getPhotoFilePath()) && !is_dir($model->getPhotoFilePath())) {
             return Yii::$app->response->sendFile($model->getPhotoFilePath());
-        } else{
+        } else {
             Yii::$app->session->setFlash('error', Yii::t('app', 'Rasm topilmadi'));
             return $this->redirect(Yii::$app->request->referrer);
         }
@@ -212,13 +218,13 @@ class BookController extends Controller
 
     public function actionDownload()
     {
-        if (Yii::$app->request->isPost){
+        if (Yii::$app->request->isPost) {
             $id = Yii::$app->request->post('id');
             $model = Book::findOne(['uuid' => $id]);
 
-            if (file_exists($model->getFilePath()) && !is_dir($model->getFilePath())){
+            if (file_exists($model->getFilePath()) && !is_dir($model->getFilePath())) {
                 return Yii::$app->response->sendFile($model->getFilePath());
-            } else{
+            } else {
                 Yii::$app->session->setFlash('error', Yii::t('app', 'Fayl topilmadi'));
                 return $this->redirect(Yii::$app->request->referrer);
             }

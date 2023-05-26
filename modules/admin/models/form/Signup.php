@@ -25,19 +25,19 @@ class Signup extends Model
         $class = Yii::$app->getUser()->identityClass ? : 'mdm\admin\models\User';
         return [
             ['username', 'filter', 'filter' => 'trim'],
-            ['username', 'required'],
+            ['username', 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             ['username', 'unique', 'targetClass' => $class, 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'filter', 'filter' => 'trim'],
-            ['email', 'required'],
+            ['email', 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             ['email', 'email'],
             ['email', 'unique', 'targetClass' => $class, 'message' => 'This email address has already been taken.'],
 
-            ['password', 'required'],
+            ['password', 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             ['password', 'string', 'min' => 6],
 
-            ['retypePassword', 'required'],
+            ['retypePassword', 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             ['retypePassword', 'compare', 'compareAttribute' => 'password'],
         ];
     }

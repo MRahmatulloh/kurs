@@ -142,9 +142,9 @@ class ModuleController extends Controller
                 if ($model->save()) {
                     Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
                 }else{
-                    Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!. {title}: {errors}', [
+                    Yii::$app->session->setFlash('error', Yii::t('app', '{title}: {errors}', [
                         'title' => $model->getTitle(),
-                        'errors' => json_encode($model->getErrors()),
+                        'errors' => \app\components\Globals::errorMessageText($model->getErrors()),
                     ]));
                 }
                 return $this->redirect('index');
@@ -170,9 +170,9 @@ class ModuleController extends Controller
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
             }else{
-                Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!. {title}: {errors}', [
+                Yii::$app->session->setFlash('error', Yii::t('app', '{title}: {errors}', [
                     'title' => $model->getTitle(),
-                    'errors' => json_encode($model->getErrors()),
+                    'errors' => \app\components\Globals::errorMessageText($model->getErrors()),
                 ]));
             }
 
@@ -200,9 +200,9 @@ class ModuleController extends Controller
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
             }else{
-                Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!. {title}: {errors}', [
+                Yii::$app->session->setFlash('error', Yii::t('app', '{title}: {errors}', [
                     'title' => $model->getTitle(),
-                    'errors' => json_encode($model->getErrors()),
+                    'errors' => \app\components\Globals::errorMessageText($model->getErrors()),
                 ]));
             }
             return $this->redirect(['view', 'id' => $model->id]);

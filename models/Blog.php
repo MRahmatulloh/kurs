@@ -43,7 +43,7 @@ class Blog extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'text'], 'required'],
+            [['title', 'text'], 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             [['text'], 'string'],
             [['status'], 'integer'],
             [['image'], 'file', 'extensions' => 'jpg, jpeg, png, bmp', 'maxFiles' => 1, 'maxSize' => 4 * 1024 * 1024],

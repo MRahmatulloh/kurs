@@ -110,12 +110,14 @@ class CourseController extends Controller
                 $model->uuid = format_uuidv4(random_bytes(16));
                 $model->created_by = Yii::$app->user->identity->id;
 
-                if ($model->save()){
+                if ($model->save()) {
                     Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
                     return $this->redirect(['view', 'id' => $model->id]);
-                }else{
-                    prd($model->attributes);
-                    Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!'));
+                } else {
+                    Yii::$app->session->setFlash('error', Yii::t('app', '{title}: {errors}', [
+                        'title' => $model->getTitle(),
+                        'errors' => \app\components\Globals::errorMessageText($model->getErrors()),
+                    ]));
                 }
             }
         }
@@ -140,12 +142,14 @@ class CourseController extends Controller
             if ($model->load($this->request->post())) {
                 $model->updated_by = Yii::$app->user->identity->id;
 
-                if ($model->save()){
+                if ($model->save()) {
                     Yii::$app->session->setFlash('success', Yii::t('app', 'Ma\'lumotlar muvaffaqiyatli saqlandi!'));
                     return $this->redirect(['view', 'id' => $model->id]);
-                }else{
-                    prd($model->attributes);
-                    Yii::$app->session->setFlash('error', Yii::t('app', 'Xatolik yuz berdi!'));
+                } else {
+                    Yii::$app->session->setFlash('error', Yii::t('app', '{title}: {errors}', [
+                        'title' => $model->getTitle(),
+                        'errors' => \app\components\Globals::errorMessageText($model->getErrors()),
+                    ]));
                 }
             }
         }

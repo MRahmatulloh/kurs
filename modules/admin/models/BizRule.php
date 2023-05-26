@@ -60,7 +60,7 @@ class BizRule extends \yii\base\Model
     public function rules()
     {
         return [
-            [['name', 'className'], 'required'],
+            [['name', 'className'], 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             [['className'], 'string'],
             [['className'], 'classExists']
         ];

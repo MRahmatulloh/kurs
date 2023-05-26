@@ -30,7 +30,7 @@ class Auth extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'source', 'source_id'], 'required'],
+            [['user_id', 'source', 'source_id'], 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             [['user_id'], 'integer'],
             [['source', 'source_id'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],

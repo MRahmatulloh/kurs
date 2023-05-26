@@ -24,7 +24,7 @@ class ChangePassword extends Model
     public function rules()
     {
         return [
-            [['oldPassword', 'newPassword', 'retypePassword'], 'required'],
+            [['oldPassword', 'newPassword', 'retypePassword'], 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             [['oldPassword'], 'validatePassword'],
             [['newPassword'], 'string', 'min' => 6],
             [['retypePassword'], 'compare', 'compareAttribute' => 'newPassword'],

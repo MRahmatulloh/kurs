@@ -24,7 +24,7 @@ class Login extends Model
     {
         return [
             // username and password are both required
-            [['username', 'password'], 'required'],
+            [['username', 'password'], 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()

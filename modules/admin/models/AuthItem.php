@@ -65,7 +65,7 @@ class AuthItem extends Model
     {
         return [
             [['ruleName'], 'checkRule'],
-            [['name', 'type'], 'required'],
+            [['name', 'type'], 'required', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             [['name'], 'checkUnique', 'when' => function () {
                     return $this->isNewRecord || ($this->_item->name != $this->name);
                 }],

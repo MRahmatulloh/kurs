@@ -46,40 +46,18 @@ use yii\bootstrap4\Breadcrumbs;
     <!-- /.content-header -->
 
     <?php if (Yii::$app->session->hasFlash('success')): ?>
-        <?php
-        $text = '';
-        if (is_array(Yii::$app->session->getFlash('success'))) {
-            foreach (Yii::$app->session->getFlash('success') as $key => $value) {
-                $text .= $value . '<br>';
-            }
-        } else {
-            $text = Yii::$app->session->getFlash('success');
-        }
-        ?>
-
         <?= \hail812\adminlte\widgets\Alert::widget([
             'type' => 'success',
             'title' => 'Amal muvaffaqiyatli!',
-            'body' => "<h3>" . $text . "</h3>",
+            'body' => "<h5>" . Yii::$app->session->getFlash('success') . "</h5>",
         ]) ?>
     <?php endif; ?>
 
     <?php if (Yii::$app->session->hasFlash('error')): ?>
-        <?php
-        $text = '';
-        if (is_array(Yii::$app->session->getFlash('error'))) {
-            foreach (Yii::$app->session->getFlash('error') as $key => $value) {
-                $text .= $value . '<br>';
-            }
-        } else {
-            $text = Yii::$app->session->getFlash('error');
-        }
-        ?>
-
         <?= \hail812\adminlte\widgets\Alert::widget([
             'type' => 'danger',
             'title' => 'Xatolik!',
-            'body' => "<h3>" . $text . "</h3>",
+            'body' => "<h5>" . Yii::$app->session->getFlash('error') . "</h5>",
         ]) ?>
     <?php endif; ?>
 

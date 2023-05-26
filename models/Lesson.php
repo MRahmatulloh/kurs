@@ -74,14 +74,13 @@ class Lesson extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'module_id'], 'required'],
+            [['name', 'module_id', 'file'], 'required', 'on' => 'create', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
+            [['name', 'module_id' ], 'required', 'on' => 'update', 'message' => '{attribute} bo\'sh bo\'lishi mumkin emas'],
             [['description', 'status'], 'string'],
             [['module_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['uuid', 'name', 'filename'], 'string', 'max' => 255],
             [['module_id'], 'exist', 'skipOnError' => true, 'targetClass' => Module::class, 'targetAttribute' => ['module_id' => 'id']],
             [['file'], 'file', 'extensions' => 'mp4, 3gp, mov, avi', 'maxFiles' => 1, 'maxSize' => 150 * 1024 * 1024],
-            [['file'], 'required', 'on' => 'create'],
-            [['filename'], 'required', 'on' => 'create'],
             ];
     }
 
